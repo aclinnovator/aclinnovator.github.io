@@ -1,18 +1,30 @@
-// $(window).scroll(function(){
-// 	console.log("Window loaded");
-// 		if ($(this).scrollTop() >10) {
-// 				console.log("Scroll event hit")
-// 		} else {
-// 			$('#building').fadeOut(300);
-// 		}		
-// });
+$(window).scroll(function(){
+	console.log("Window loaded");
+		if ($(this).scrollTop() > $("header").height() + 300) {
+			$('#building').slideUp(700);
+		} else {
+			$('#building').slideDown(700);
+
+		}
+});
+
+$(window).resize(function(){
+	console.log("Resized");
+	$('header').height($(window).height());
+	$('header').width($(window).width());
+	$('header').height($(window).height());
+	$('header').width($(window).width());
+
+});
 
 $(document).ready(function(){
 	console.log("Document loaded");
 
-	$('#building').slideToggle(300);
+	$('#building').slideDown(300);
+	$('header').height($(window).height());
+	$('header').width($(window).width());
 
 	$('.pillar').click(function(){
-
+		console.log("Pillar CLicked");
 	});
 });

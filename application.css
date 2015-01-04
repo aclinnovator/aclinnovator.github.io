@@ -1,7 +1,8 @@
 header {
 	padding-top:10%;
 	height:300px;
-	background-color: #22313F;
+	background-color: ##2C3E50;
+	background-image: url("http://blog.generalassemb.ly/blog/wp-content/uploads/2014/07/clean-code.jpg");
 }
 
 #header-center {
@@ -23,8 +24,10 @@ header {
 	display: none;
 	width:100%;
 	background-color: #4ECDC4;
-	border-top:20px #FDE3A7/*#F9690E*/ solid;
-	border-bottom:20px #FDE3A7/*#F9690E*/ solid;
+/*	border-top:20px #FDE3A7 solid;
+	border-bottom:20px #FDE3A7 solid; */
+	border-top:20px #22313F solid;
+	border-bottom: 20px #22313F solid;
 
 
 }
@@ -90,14 +93,16 @@ header {
 	display: block;
 	height:20px;
 	width: 100px;
-	background-color: #FDE3A7;
+	background-color: #22313F;
 	border-radius:10px;
+	margin-top: 2px;
+	margin-bottom:2px; 
 }
 .pillar-pillar {
 	width:100px;
-	height:500px;
+	height:400px;
 	display: inline-block;
-	background-color: #FDE3A7;
+	background-color: #22313F; /*#FDE3A7;*/
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
 	border-top-left-radius: 10px;
@@ -106,6 +111,20 @@ header {
 	margin-left: auto;
 
 }
+.pillar-pillar:hover {
+	background-color: #FDE3A7;
+}
+
+.pillar-lines {
+	height:480px;
+	width:5px;
+	margin-right:auto;
+	margin-left: auto;
+	background-color: #F4B350;
+	border-radius: 10px;
+	display: inline-block;
+}
+
 .building-bottom {
 	width:80%;
 	margin-right:auto;
@@ -117,14 +136,7 @@ header {
 	border-radius:90%;
 }
 
-#very-bottom {
-	margin: auto;
-	width:80%;
-	border-width:50px;
-	border:10px solid #C5EFF7;
-	border-radius:10px;
-}
 footer {
-	height:300px;
+	height:1000px;
 	background-color: #2C3E50;
 }
