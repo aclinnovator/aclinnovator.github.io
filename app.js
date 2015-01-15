@@ -29,12 +29,3 @@ $(document).ready(function(){
 	});
 });
 
-var aclinnovator = new Gh3.User("aclinnovator");
-
-aclinnovator.fetch(function(err, resultUser){
-		if (err){
-			throw "Outch...";
-		} else {
-			console.log(JSON.stringify(resultUser));
-		}
-});
