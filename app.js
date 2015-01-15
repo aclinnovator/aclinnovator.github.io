@@ -25,6 +25,16 @@ $(document).ready(function(){
 	$('header').width($(window).width());
 
 	$('.pillar').click(function(){
-		console.log("Pillar CLicked");
+		console.log("Pillar Clicked");
 	});
+});
+
+var aclinnovator = new Gh3.User("aclinnovator");
+
+aclinnovator.fetch(function(err, resultUser){
+		if (err){
+			throw "Outch...";
+		} else {
+			console.log(JSON.stringify(resultUser));
+		}
 });
