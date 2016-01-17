@@ -1,0 +1,15 @@
+title: The Thoughtforge
+email: aclscientist@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  This is where the ideasmith forges his thoughts and shares them with you.
+  He hopes they serve you as excellent pondering material.
+author:
+  fullname: Akiva Lipshitz
+  github: theideasmith
+  twitter: theideasmith
+url: "http://theideasmith.github.io" # the base hostname & protocol for your site
+twitter_username: theideasmith
+github_username:  theideasmith
+
+# Build settings
+markdown: kramdown
