@@ -1,0 +1,180 @@
+header {
+	padding-top:10%;
+	height:300px;
+	background-color: ##2C3E50;
+	background-image: url("http://blog.generalassemb.ly/blog/wp-content/uploads/2014/07/clean-code.jpg");
+}
+
+#header-center {
+	font-family: Helvetica;
+	font-size:  5em;
+	color: #4ECDC4;
+	text-align:center;
+}
+
+#welcome{
+	 font-family:Helvetica;
+	 text-align:center;
+	 color:#4ECDC4;
+	 font-size:30px;
+	 display: block;
+}
+
+#building {
+	display: none;
+	width:100%;
+	background-color: #4ECDC4;
+	height: 500px;
+
+}
+
+#center-box{
+	display: inline-block;
+	width:200px;
+}
+
+@-webkit-keyframes Floatingx{
+    from {-webkit-transform:translate(0, 0px);}
+    65% {-webkit-transform:translate(0, 15px);}
+    to {-webkit-transform: translate(0, -0px);    }
+}
+
+@-moz-keyframes Floating{
+    from {-moz-transform:translate(0, 0px);}
+    65% {-moz-transform:translate(0, 30px);}
+    to {-moz-transform: translate(0, 0px);}
+}
+
+#lightbulb {
+	width:200px;
+	margin-right:auto;
+	margin-left: auto;
+	display: block;
+	padding-bottom: 400px;
+
+    -webkit-animation-name: Floatingx;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-name: Floating;
+    -moz-animation-duration: 3s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: ease-in-out;
+
+
+}
+
+.iconic-lightbulb {
+	cursor: pointer;
+}
+
+.iconic-lightbulb * {
+	-webkit-transition: .4s;
+	-moz-transition: .4s;
+	transition: .4s;
+}
+
+.iconic-lightbulb .icon-container {
+	fill: #fff;
+	stroke-width: 6;
+	stroke: #fff;
+
+	-webkit-transition: .3s;
+	-moz-transition: .3s;
+	transition: .3s;
+}
+
+.iconic-lightbulb:hover .icon-container {
+	fill: #fff8db;
+
+	-webkit-transition: 2s;
+	transition: 2s;
+	-webkit-transition: 2s;
+}
+
+.iconic-lightbulb .iconic-lightbulb-light * {
+	stroke-width: 16;
+	stroke: #ddd;
+	fill: none;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.iconic-lightbulb:hover .iconic-lightbulb-light * {
+	stroke: #fc0;
+	stroke-width: 32;
+}
+
+.iconic-lightbulb .iconic-lightbulb-base {
+	fill: #666;
+}
+
+.iconic-lightbulb .iconic-lightbulb-screws * {
+	fill: none;
+	stroke-width: 16;
+	stroke: #333;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.pillar-border {
+	height:20px;
+	width:100%;
+	background-color: #22313F;
+	display:inline-block;
+}
+
+#pillars {
+	display:inline-flex;
+	  flex-flow: row wrap;
+	    justify-content: space-around;
+
+}
+
+.pillar{
+	height:100%;
+	width:10%;
+	display: inline-block;
+	padding-right: 30px;
+	padding-left: 30px;
+	margin: auto;
+}
+.pillar-top{
+	display: block;
+	height:20px;
+	width: 100%;
+	background-color: #22313F;
+	border-radius:10px;
+}
+.pillar-pillar {
+	width:100%;
+	height:400px;
+	background-color: #22313F; /*#FDE3A7;*/
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+
+
+}
+.pillar-pillar:hover {
+	background-color: #FDE3A7;
+}
+
+
+
+.building-bottom {
+	width:80%;
+	margin-right:auto;
+	margin-left: auto;
+	/*margin-top:-30px;*/
+	border-width:500px;
+	border-bottom:100px solid #FDE3A7;
+	height:10px;
+	border-radius:90%;
+}
+
+footer {
+	height:1000px;
+	background-color: #2C3E50;
+}
