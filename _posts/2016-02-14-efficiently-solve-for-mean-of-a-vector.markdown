@@ -4,7 +4,7 @@ title: Efficiently Solve for Mean of a Vector
 date: 2016-02-14T00:00:00-05:00
 ---
 
-Recently as I was reviewing for the ACTs, of the *low hanging fruit* questions was one that asked to solve for the mean of a set of numbers (by hand). Formally, given an n-tuple $x=(x_1,...,x_i,...,x_n)$, I needed to solve for
+Recently as I was reviewing for the ACTs, of the *low hanging fruit* questions was one that asked to solve for the mean of a set of numbers by hand. Formally, given an n-tuple $x=(x_1,...,x_i,...,x_n)$, I needed to solve for
 
 $$\frac{\sum_{i=0}^n{x_i}}{n}$$
 
