@@ -4,15 +4,13 @@ title: Efficiently Solve for Mean of a Vector
 date: 2016-02-14T00:00:00-05:00
 ---
 
-Recently as I was reviewing for the ACTs, one of the easier questions involved solving for a mean of a set of numbers by hand, formally, an an n-tuple $x=(x_1,...,x_i,...,x_n)$. This question is low hanging fruit, and involves little thinking, so I took a moment to consider how to most efficiently calculate the mean the given set of numbers.
-
-A I could have impulsively used brute force to calculate the mean as it is formally defined:
+Recently as I was reviewing for the ACTs, of the *low hanging fruit* questions was one that asked to solve for the mean of a set of numbers (by hand). Formally, given an n-tuple $x=(x_1,...,x_i,...,x_n)$, I needed to solve for
 
 $$\frac{\sum_{i=0}^n{x_i}}{n}$$
 
-But this method takes more time as the numbers get larger and this question shouldn't take longer than a few seconds. 
+But this method takes more time as the numbers get larger. This question shouldn't take longer than a few seconds so a quicker method would be more efficient. 
 
-Instead, I used this formula:
+I considered and then used this formula:
 
 $$\textbf{x}_{min}+\frac{\sum_{i=0}^n{\textbf{x}_i-\textbf{x}_{min}}}{n}$$
 
