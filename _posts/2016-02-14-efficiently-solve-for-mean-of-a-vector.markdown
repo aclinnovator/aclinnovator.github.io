@@ -28,4 +28,4 @@ $$\begin{align}
 
 If you are internally laughing at the triviality of this concept, I concur. Do not make a fundamental attribution error by assuming this post belies my ability to do *real math*. 
 
-My true intent in writing this post was to practice my mathjax skills and to share a quick idea I had. If I don't have time to write long, deep posts, the substitute is more simpler ones. 
+My true intent in writing this post was to practice my mathjax skills and to share a quick idea I had. If I don't have time to write about deep ideas, at least I will have shared simpler ones because $1>0$
