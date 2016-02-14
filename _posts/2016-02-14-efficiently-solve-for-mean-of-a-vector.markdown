@@ -4,9 +4,7 @@ title: Efficiently Solve for Mean of a Vector
 date: 2016-02-14T00:00:00-05:00
 ---
 
-This is a really simple thought, but I have reason to post it.
-
-Recently as I was reviewing for the ACTs, one of the simpler questions involved solving for a mean of a set of numbers by hand, formally, an an n-tuple $x=(x_1,...,x_i,...,x_n)$. This question is low hanging fruit, and involves little thinking, so I took a moment to consider how to most efficiently calculate the mean the given set of numbers.
+Recently as I was reviewing for the ACTs, one of the easier questions involved solving for a mean of a set of numbers by hand, formally, an an n-tuple $x=(x_1,...,x_i,...,x_n)$. This question is low hanging fruit, and involves little thinking, so I took a moment to consider how to most efficiently calculate the mean the given set of numbers.
 
 A I could have impulsively used brute force to calculate the mean as it is formally defined:
 
