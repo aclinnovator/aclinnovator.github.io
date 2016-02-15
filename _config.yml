@@ -12,4 +12,4 @@ twitter_username: theideasmith
 github_username:  theideasmith
 
 # Build settings
-markdown: maruku
+markdown: kramdown
