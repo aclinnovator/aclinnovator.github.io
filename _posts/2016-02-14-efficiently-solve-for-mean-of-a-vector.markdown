@@ -4,17 +4,13 @@ title: Efficiently Solve for Mean of a Vector
 date: 2016-02-14T00:00:00-05:00
 ---
 
-This is a really simple thought, but I have reason to post it.
-
-Recently as I was reviewing for the ACTs, one of the simpler questions involved solving for a mean of a set of numbers by hand, formally, an an n-tuple $x=(x_1,...,x_i,...,x_n)$. This question is low hanging fruit, and involves little thinking, so I took a moment to consider how to most efficiently calculate the mean the given set of numbers.
-
-I could have impulsively used brute force to calculate the mean as it is formally defined as:
+Recently as I was reviewing for the ACTs, of the *low hanging fruit* questions was one that asked to solve for the mean of a set of numbers by hand. Formally, given an n-tuple $x=(x_1,...,x_i,...,x_n)$, I needed to solve for
 
 $$\frac{\sum_{i=0}^n{x_i}}{n}$$
 
-But I know this method takes more time as the numbers get larger.
+But this method takes more time as the numbers get larger. This question shouldn't take longer than a few seconds so a quicker method would be more efficient. 
 
-Instead, we I used this formula:
+I considered and then used this formula:
 
 $$\textbf{x}_{min}+\frac{\sum_{i=0}^n{\textbf{x}_i-\textbf{x}_{min}}}{n}$$
 
@@ -26,4 +22,6 @@ $$\begin{align}
    = \frac{\sum_{i=0}^n{\textbf{x}_i}}{n}\tag 3\\
 \end{align}$$
 
-You may be laughing at how trivial this concept is, and I agree. My true intent was not to make your life easier by presenting a new way to calculate the mean by hand because you would just use a computer. Instead,  it was an exercise in learning more latex and in simplifying expressions in summation notation.
+If you are internally laughing at the triviality of this concept, I concur. Do not make a fundamental attribution error by assuming this post belies my ability to do *real math*. 
+
+My true intent in writing this post was to practice my mathjax skills and to share a quick idea I had. If I don't have time to write about deep ideas, at least I will have shared simpler ones because $1>0$

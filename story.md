@@ -22,9 +22,9 @@ Akiva is very proud for his winning [FollowPlants hack at HackDisrupt 2015](http
 
 ## Summer 2015
 
-In the summer of 2015, Akiva interned as a software developer at [KeenHome](http://keenhome.io), a home automation startup, where he developed emulation technology for an in-development product. His software was deployed thousands of times to stress test the keenhome backend.
+In the summer of 2015, Akiva interned as a software developer at [Keen Home](http://keenhome.io), a home automation startup, where he developed emulation technology for an in-development product. His software was deployed thousands of times to stress test the Keen Home backend.
 
-He also continued an internship at [Thrive capital](thrivecap.com), performing due diligence on early later-stage investment opportunities, communicating his analyses directly to Thrive's executives.
+He also continued an internship at [Thrive capital](thrivecap.com), performing due diligence on early-stage investment opportunities, communicating his analyses directly to Thrive's executives.
 
 Akiva also hacked biology at Cooper Union's summer STEM program. Along with his team, Akiva developed novel *E. Coli*, capable of responding to the presence of dangerous UV light by producing melanin.
 
