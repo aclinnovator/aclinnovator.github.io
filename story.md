@@ -28,12 +28,8 @@ He also continued an internship at [Thrive capital](thrivecap.com), performing d
 
 Akiva also hacked biology at Cooper Union's summer STEM program. Along with his team, Akiva developed novel *E. Coli*, capable of responding to the presence of dangerous UV light by producing melanin.
 
-## The Present
+## 2016 School Year
 
-Akiva is currently studying statistical relationships between structure and function in the *C. Elegans* nervous system and developing models for predicting how structural changes affect network behavior. **Akiva is currently looking for research opportunities in a theoretical neuroscience lab. Contact him if you are interested**
-
-Akiva is an avid reader of books on entrepreneurship (in the past few months he has read _The Lean Startup_, _Zero to One_, and _The Innovators_). He admires people like Elon Musk and Steve Wozniak. Akiva loves creating new things at his local makerspace, and teaches a weekly IOS development class at his school.
-
-**He is a strong advocate for education, is inspired and wants to inspire. Most importantly, Akiva reflects upon his life and challenges himself to conquer new frontiers.**
+Akiva studied the dynamics of the *C. Elegans* nervous system using calcium time series data from Saul Kato. He began contributing to the OpenWorm project, run by Dr. Stephen Larson, to begin work on neuronal-analysis, a toolkit for analyzing and comparing neuronal timeseries data. In addition, Akiva interned with Dr. Christoph Kirst of the biophysics department at Rockefeller University, where he studied the learning process and the structure of the solution space of a classical recurrent learning algorithm. This work yielded new insight into how complex computations are learned and implemented in distributed neuronal circuitry. Akiva then interned under Dr. Adam Calhoun, a postdoc in Mala Murthy's Drosophila Courtship and Accoustic Communication lab at Princeton. There Akiva worked on a visual tracking system for Drosophila moving about in behavioral assays. This project took advantage of modern machine vision technologies including tensorflow. 
 
 * * *

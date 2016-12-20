@@ -22,6 +22,6 @@ $$\begin{align}
    = \frac{\sum_{i=0}^n{\textbf{x}_i}}{n}\tag 3\\
 \end{align}$$
 
-If you are internally laughing at the triviality of this concept, I concur. Do not make a fundamental attribution error by assuming this post belies my ability to do *real math*. 
+If you are internally laughing at the triviality of this concept, I concur. Do not make a fundamental attribution error by assuming that my mathematical abilities are limited to this complexity. That I find this worth posting is indicative of the long ways I have to grow and deepen my mathematical understanding. 
 
 My true intent in writing this post was to practice my mathjax skills and to share a quick idea I had. If I don't have time to write about deep ideas, at least I will have shared simpler ones because $1>0$
