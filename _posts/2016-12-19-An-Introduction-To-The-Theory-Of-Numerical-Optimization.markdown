@@ -1,13 +1,12 @@
 ---                                             
 layout: post                                    
-title: Grid Dimensionality Minimization Problem 
+title: On Approximating Functions or Fitting Models
 date: 2016-02-14                                
 ---                                             
-## On Approximating Functions or Fitting Models
 
-Here's the situation: you have a dataset of pairs $(x_i,y_i)$ where $i$ is an indexing variable, assumed to be an integer and $0\le i\le n$ and where  $n$ is the total number of datapoints. 
+Here's the situation: you have a dataset of pairs $$(x_i,y_i)$$ where $i$ is an indexing variable, assumed to be an integer and $0\le i\le n$ and where  $n$ is the total number of datapoints. 
 
-In math, there are two ways to define a function $g$. The first way is to write an expression for $g(x)$ and the second is to write down the set total set of pairs $(x,y)$ such that $y=g(x)$. Because the set of points for real-valued functions (functions defined on the real numbers) would be impossible to write down because there are an uncountably infinite number of such points, we prefer to define functions with the former option. 
+In math, there are two ways to define a function $g$. The first way is to write an expression for $g(x)$ and the second is to write down the set total set of pairs $(x,y)$ such that $y=g(x)$. Because the set of points for real-valued functions \(functions defined on the real numbers\\) would be impossible to write down because there are an uncountably infinite number of such points, we prefer to define functions with the former option. 
 
 Now when we have a dataset of points, we can imagine that there is a function $F(x)$ and these points come from the set of pairs $(x,y)$ such that $y=F(x)$. However, knowing just the datapoints is useless to us if we want to know the value of the function for some $x$ not included in the data. Our challenge is to develop a method for figuring out what $F$ is. 
 
@@ -19,7 +18,9 @@ This symbolic structure will be formally defined as a model:
 
 ----
 **Definition 1.1**
-A **model** is a function $f$ with parameters $w_1, ..., w_n$ and independent variable $x$ declared as $$y = f(x,w_1, ..., w_n)$$ 
+
+> A **model** is a function $f$ with parameters $w_1, ..., w_n$ and independent variable $x$ declared as 
+ $$y = f(x,w_1, ..., w_n)$$ 
 
 ---
 
@@ -27,6 +28,7 @@ Once we have made an educated guess as to the structure of our model, we will wa
 
 ----
 **Definition 1.2**
+
 > We say we are trying to **fit** a model $f$ on a set of data points of some unknown function $F$ $\{(x_i, y_i)\}$,  if our goal is to best approximate $F$ with $f$
 
 ---
@@ -35,6 +37,7 @@ That is, we want to know what the best parameters are so that $f$ is as close as
 
 ---
 **Definition 1.3**
+
 > We say we are trying to approximate a function $F$ with a model $f$ if we are trying to find the set of parameters $\{w\}$ to $f$ such that for any $x_i$ in our dataset the value $\hat{y_i}=f(x_i, w_1, ..., w_n) $ is as close as possible  to the actual value of the function at $x_i$ which is $F(x) = y_i$. 
 
 ---
@@ -85,7 +88,7 @@ How do we do this?
 ## The Secret Sauce
 If we know how much each parameter $w_i$ contributes to error, we can update it accordingly. Let's say we know that the rate of change of error $E$ as $w_i$ increases is $r_i$. Then we can change $w_i$ in the direction for which $E$ decreases. 
 
-If we define some $\alpha$ satisfying the constraints $0<\alpha<1$ (arbitrary but sensible restrictions on $\alpha$, you'll see why) then we use an update rule:
+If we define some $\alpha$ satisfying the constraints $0<\alpha<1$, arbitrary but sensible restrictions on $\alpha$, you\'ll see why. Then we use an update rule:
 
 $$w_i \text{ becomes } w_i-\alpha r_i$$
 
@@ -104,7 +107,7 @@ Bear with me here if you don't know calculus.
 >
 > This is definition is very useful to us. We can use the derivative to find $r_i$, the rate of error with respect to each parameter $w_i$. 
 
-> (Note that the $i$'s under the parameters $w$ and rates $r$, are different that the $i's$ under the data points and model output $y_i, x_i, \hat{y}_i$. $i$ is just a general indexing variable)
+> Note that the $i$'s under the parameters $w$ and rates $r$, are different that the $i's$ under the data points and model output $y_i, x_i, \hat{y}_i$. $i$ is just a general indexing variable
 
 Recall that the error function $E$ takes as inputs all data values $y_i$ and $x_i$ and all parameters $w$. 
 
@@ -192,10 +195,10 @@ I hope this was a good introduction to the theory of numerical optimization. Fro
 
 ## Exercises
 
-1. What symbolic form would you use to fit a model with data looking like:  ![Exercise B](./{{site.url}}/images/exer-B.png)
+1. What symbolic form would you use to fit a model with data looking like:  ![Exercise B]({{site.url}}/images/exer-B.png)
 
 2. How about for 
-   ![Exercise A](./{{site.url}}/images/exer-A.png)
+   ![Exercise A]({{site.url}}/images/exer-A.png)
 
    **Hint:** use desmos.com to graph the function $f(x) = Ce^x + b$
 

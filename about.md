@@ -29,7 +29,7 @@ He'd love to talk. Connect via:
 
 
 
-![Thats me writing code]({{ site.baseurl }}/assets/me.jpg)
+![Thats me writing code]({{ site.baseurl }}/assets/me.png)
 
 
 

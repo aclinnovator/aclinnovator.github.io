@@ -1,15 +1,20 @@
-title: The Thoughtforge
-email: aclscientist@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  This is where the ideasmith forges his thoughts and shares them with you.
-  He hopes they serve you as excellent pondering material.
-author:
-  fullname: Akiva Lipshitz
-  github: theideasmith
-  twitter: theideasmith
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: The School of Thought
+email: hemangsk@gmail.com
+description: A forge of ideas
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://theideasmith.github.io" # the base hostname & protocol for your site
 twitter_username: theideasmith
 github_username:  theideasmith
+paginate: 5
 
+gems: [jekyll-paginate, kramdown]
 # Build settings
-markdown: kramdown
+markdown: kramdown    
