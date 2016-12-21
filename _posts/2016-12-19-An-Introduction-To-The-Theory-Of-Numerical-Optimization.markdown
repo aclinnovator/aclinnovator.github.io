@@ -41,7 +41,7 @@ That is, we want to know what the best parameters are so that $f$ is as close as
 
 What do we mean by making a model "as close as possible" to a function.
 
-We define some function which takes in the actual value of the function and our guess and spits our a number representing how bad our guess is. Let us say that this is called a distance function defined as $d(\hat{y}, y)$. Formally, it takes as input an actual value of the function at some $x$ value, $F(x)=y$ and a value of the function predicted by our model $f(x)=\hat{y}$, and spits out a number. This number will be how far  $\hat{y}$ is from $y$.
+We define some function which takes in the actual value of the function and our guess and spits our a number representing how bad our guess is. Let us say that this is called a distance function defined as $D(\hat{y}, y)$. Formally, it takes as input an actual value of the function at some $x$ value, $F(x)=y$ and a value of the function predicted by our model $f(x)=\hat{y}$, and spits out a number. This number will be how far  $\hat{y}$ is from $y$.
 
 Our goal will be to find the set of parameters to our model so that we get our distance $e$ as low as possible across the entire dataset.
 
@@ -63,13 +63,14 @@ Here's where we are now:
 1. We have a symbolic model which we think will be a good approximator to our function
 2. We need to **fit** this model by making its guesses as good as possible.
 
-We shall say that getting our guesses to be as good as possible means finding the parameters which make $e$ as low as possible over the entire dataset. For our purposes, we will define an error function which takes the values of $D$ for all actual values of the function and predicted values of the function and spits out a number representing the error of our model. We will need to get this error as little as possible.
+We shall say that getting our guesses to be as good as possible means finding the parameters which make the distance between the actual value of the function and the one our model spits out as low as possible over the entire dataset. We shall denote this distance by the function $D$. For our purposes, we will define an error function which takes the values of $D$ for all actual values of the function and predicted values of the function and spits out a number representing the error of our model. We will need to get this error as little as possible.
 
 If we take $D$ to be defined as the square of the distance between the actual value of the function and that value predicted by our model
 
 $$
 D(\hat{y}, y) = \left(y-\hat{y}\right)^2
 $$
+
 Then we can define the  error function called $E$. We need to get the value of $E$ as low as possible. Taking
 
 $$E = \frac{1}{n}\sum^m_{j=0}d(\hat{y}_j, y_j)$$
