@@ -1,7 +1,7 @@
 ---
 layout: post
 title: On Approximating Functions or Fitting Models
-date: 2016-02-14
+date: 2016-12-19
 ---
 ## On Approximating Functions or Fitting Models
 ### A short essay on the topic with exercises at the bottom
