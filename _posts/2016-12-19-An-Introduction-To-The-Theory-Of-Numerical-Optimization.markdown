@@ -4,6 +4,7 @@ title: On Approximating Functions or Fitting Models
 date: 2016-12-19
 ---
 ## On Approximating Functions or Fitting Models
+
 ### A short essay on the topic with exercises at the bottom
 
 Here's the situation: you have a dataset of pairs $(x_i,y_i)$ where $i$ is an indexing variable, assumed to be an integer and $0\le i\le n$ and where  $n$ is the total number of datapoints.
