@@ -229,7 +229,7 @@ Finally, we integrate these ideas into the error function $E$ to find the deriva
 The general rule is:
 
 $$
-r_i = \frac{dE}{dw_1} = \frac{1}{m}\displaystyle\sum^m_{j=0}{\frac{dD}{dw_i}}
+r_i = \frac{dE}{dw_i} = \frac{1}{m}\displaystyle\sum^m_{j=0}{\frac{dD}{dw_i}}
 $$
 
 and so for each $r_i$:
