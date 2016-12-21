@@ -289,6 +289,7 @@ I hope this was a good introduction to the theory of numerical optimization. Fro
 **9** Why do you think the error function is defined as the mean distance $< D(y, \hat{y})>$ and not just as the sum of distances?
 
 **10** Try implementing learning in python [or whichever language you are most familiar with] with the example model and learning rates we derived in **example 1.1**
+
   1. To do this, you need to choose arbitrary constants for the parameters to the function $F(x)$ which the model will try to approximate.
   2. Generate some data with these parameters by generating a set of $(x, F(x))$ pairs.
   3. Implement the learning equations and try to recover the values you picked for the parameters from the data alone using the model. Note: **you will need to define a number of iterations to train your model for.**
@@ -301,6 +302,7 @@ I hope this was a good introduction to the theory of numerical optimization. Fro
 **11** Derive an equation for $r$ given a model with the format $f(x, w) = wx$ with the derivative rule $\frac{dD}{dw} = (y-wx)w$
 
 **12** Implement this model in python using the code you wrote for exercise (10)
+
    1. Generate a dataset with the function $f(x) = w$ for some $w$ you choose
    2. Implement learning with your answer to question $3$ in python
    3. Run the algorithm four times for $\alpha = 0.025, 0.2, 0.6, 1.0$ for a number of iterations $n = 1000/\alpha$
