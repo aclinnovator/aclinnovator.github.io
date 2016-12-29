@@ -4,6 +4,7 @@ title: Story
 permalink: /story/
 ---
 
+![]({{ site.baseurl }}/images/board.png)
 # Summer 2013
 In the summer of 2013, Akiva interned at elevatr, a startup in NYC whose mission he shared. [This article](http://blog.elevatr.com/post/58699164214/a-day-in-the-life-of-a-13-year-old-intern) was written about Akiva’s internship. Akiva also [reflected on his internship](http://blog.elevatr.com/post/58699164214/a-day-in-the-life-of-a-13-year-old-intern). That same summer, he began meeting with entrepreneurs and venture capitalists to learn from them.
 
@@ -33,3 +34,6 @@ Akiva also hacked biology at Cooper Union's summer STEM program. Along with his 
 Akiva studied the dynamics of the *C. Elegans* nervous system using calcium time series data from Saul Kato. He began contributing to the OpenWorm project, run by Dr. Stephen Larson, to begin work on neuronal-analysis, a toolkit for analyzing and comparing neuronal timeseries data. In addition, Akiva interned with Dr. Christoph Kirst of the biophysics department at Rockefeller University, where he studied the learning process and the structure of the solution space of a classical recurrent learning algorithm. This work yielded new insight into how complex computations are learned and implemented in distributed neuronal circuitry. Akiva then interned under Dr. Adam Calhoun, a postdoc in Mala Murthy's Drosophila Courtship and Accoustic Communication lab at Princeton. There Akiva worked on a visual tracking system for Drosophila moving about in behavioral assays. This project took advantage of modern machine vision technologies including tensorflow. 
 
 * * *
+
+
+

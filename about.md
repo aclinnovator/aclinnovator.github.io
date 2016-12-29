@@ -6,7 +6,7 @@ permalink: /about/
 
 Welcome Akiva's *forge*.
 
-Akiva is a 15 year old indie scientist, software developer, and thinker. Akiva is currently studying statistical relationships between structure and function in the *C. Elegans* nervous system and developing models for predicting how structural changes affect network behavior.
+Akiva is a 15 year old scientist, software developer, and thinker. Akiva is currently studying statistical relationships between structure and function in the *C. Elegans* nervous system and developing models for predicting how structural changes affect network behavior.
 
 Relentlessly resourceful and persistent, Akiva pursues what he is deeply passionate about with a tsunami of energy. He actualizes his potential and endeavors to create value for himself and ultimately the world.
 

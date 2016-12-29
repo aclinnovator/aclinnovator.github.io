@@ -3,58 +3,50 @@ layout: default
 ---
 
 <div class="home">
+  {% if site.theme_settings.header_text %}
+  <div class="call-out"
+  style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
+    {{ site.theme_settings.header_text }}
+  </div>
+  {% endif %}
 
-
-  {% for post in paginator.posts%}
-  <div class="post postContent">
-    <div  class="postDate"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</time>
+  <div class="posts">
+    {% for post in paginator.posts %}
+    <div class="post-teaser">
+      <header>
+        <h1>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+            {{ post.title }}
+          </a>
+        </h1>
+        <p class="meta">
+          {{ post.date | date: "%B %-d, %Y" }}
+        </p>
+      </header>
+      <div class="excerpt">
+        {{ post.excerpt }}
+        <a class="button" href="{{ post.url | prepend: site.baseurl }}">
+          {{ site.theme_settings.str_continue_reading }}
+        </a>
+      </div>
     </div>
-    <div class="postTag">
-      {{post.tag}}
-    </div>
-    <br>
-    <div class="postTitle">
-    <a class='postLink' href="{{site.url}}{{site.baseurl}}{{post.url}}">{{post.title}}</a>
-    </div>
-    <div class="postExt">
-   {{ post.content | strip_html | truncatewords:20}}
-    </div>
+    {% endfor %}
   </div>
 
-  {% endfor %}
   {% if paginator.total_pages > 1 %}
-    <nav class="pagination">
-      {% if paginator.previous_page %}
-        <a class="paginationLink" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
-      {% endif %}
-
-    {% for page in (1..paginator.total_pages) %}
-      {% if page == paginator.page %}
-        <em class="paginationLink paginationLinkCurrent">{{ page }}</em>
-      {% elsif page == 1 %}
-        <a class="paginationLink" href="/">{{ page }}</a>
-      {% else %}
-        <a class="paginationLink" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
-      {% endif %}
-    {% endfor %}
-
-    {% if paginator.next_page %}
-      <a class="paginationLink" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+  <div class="pagination">
+    {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button" >
+      <i class="fa fa-chevron-left"></i>
+      {{ site.theme_settings.str_prev }}
+    </a>
     {% endif %}
-    </nav>
+    {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button" >
+      {{ site.theme_settings.str_next }}
+      <i class="fa fa-chevron-right"></i>
+    </a>
+    {% endif %}
+  </div>
   {% endif %}
-  <!--<ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta-main">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link-main" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>-->
-
-
-
 </div>
