@@ -4,8 +4,6 @@ title: An Introduction to the Theory of Numerical Approximation
 date: 2016-12-19
 ---
 
-### A short essay on the topic with exercises at the bottom
-
 Here's the situation: you have a dataset of pairs $(x_i,y_i)$ where $i$ is an indexing variable, assumed to be an integer and $0\le i\le n$ and where  $n$ is the total number of datapoints.
 
 In math, there are two ways to define a function $g$. The first way is to write an expression for $g(x)$ and the second is to write down the set total set of pairs $(x,y)$ such that $y=g(x)$. Because the set of points for real-valued functions $\text{(}$functions defined on the real numbers $\text{)}$ would be impossible to write down because there are an uncountably infinite number of such points, we prefer to define functions with the former option.
@@ -123,23 +121,23 @@ Bear with me here if you don't know calculus.
 
 > Lets say we have  a function with multiple independent variables $g(v_1, ..., v_j)$. The derivative of the function $g$  with respect to a variable $v_i$ is a number representing how the value of the function $g$ changes keeping ever other variable constant and changing $v_i$.
 >
-> We denote the derivative with the notation $\frac{dg}{dv_i}=L$ which says the derivative of $g$ with respect to $v_i$ is some number $L$. You might also see the slightly similar notation $\frac{d}{dv_i}[g]$ used.
+> We denote the derivative with the notation $\frac{\partial g}{\partial v_i}=L$ which says the derivative of $g$ with respect to $v_i$ is some number $L$. 
 
 Think for a moment how this definition could very useful to us. In fact, it constitutes the core mathematical underpinnings of regression. Remember that we are trying to minimize the error $E$ which is a function of the parameters $w_i$. Knowing how to take the derivative of error with respect to each parameter $w_i$ is exactly what we need to find $r_i$ and thereby update each $w_i$ accordingly.
 
 Recall that the error function $E$ takes as inputs all data values $y_i$ and $x_i$ and all parameters $w_i$ and $w_i$ is the indepdendent variable.
 
-Then taking the derivative $\frac{dE}{dw_i}$ for each $w_i$ yields $r_i$:
+Then taking the derivative $\frac{\partial E}{\partial w_i}$ for each $w_i$ yields $r_i$:
 
 $$
-r_i = \frac{dE}{dw_i}
+r_i = \frac{\partial E}{\partial w_i}
 $$
 
 Now that we know how to calculate $r_i$, let me restate the update rule
 more explicitly:
 
 $$
-w_{i,t+1} =  w_{i,t} - \alpha r_i =  w_{i,t} - \alpha \frac{dE}{dw_i}
+w_{i,t+1} =  w_{i,t} - \alpha r_i =  w_{i,t} - \alpha \frac{\partial E}{\partial w_i}
 $$
 
 This means we will need to derive an independent learning rule for each $w_i$ which we will do in **example 1.1**
@@ -150,7 +148,7 @@ As an integral aside (haha), here are some rules for computing derivatives which
 
 Function multiplied by a constant:
 
-> $\frac{d}{dx}\left[cg(x)\right] = c\frac{dg}{dx}$
+> $\frac{\partial}{\partial x}\left[cg(x)\right] = c\frac{dg}{dx}$
 
 > for some constant $c$
 
@@ -158,14 +156,14 @@ Sum of functions
 
 > For some function G(x) defined as the sum of individual functions $g_1(x) + g_2(x) +  ... +  g_n(x)$, it is true that
 
->   $$ \frac{dG}{dx} = \frac{dg_1}{dx} +  \frac{dg_2}{dx} + ... +  \frac{dg_n}{dx} $$
+>   $$ \frac{\partial G}{\partial x} = \frac{\partial g_1}{\partial x} +  \frac{\partial g_2}{\partial x} + ... +  \frac{\partial g_n}{\partial x} $$
 
 Square of the difference of two functions
 
 > For some function $G(x) = (c - g(x))^2$ for some constant $c$ and another function $g(x)$, it is true that
 
 
->   $$\frac{dG}{dx} = 2(c-g(x))\frac{dg}{dx} $$
+>   $$\frac{\partial G}{\partial x} = 2(c-g(x))\frac{\partial g}{\partial x} $$
 
 That is all we need.
 
@@ -214,29 +212,29 @@ $$
 Then the derivative for each individual distance for each datapoint with respect to each parameter $w_i$
 
 
-$$\frac{dD}{dw_i} = 2[y_j-w_1x_j-w_2]\times \frac{d}{dw_i}(w_1 x_j+  w_2)$$
+$$\frac{\partial D}{\partial w_i} = 2[y_j-w_1x_j-w_2]\times \frac{\partial }{\partial w_i}(w_1 x_j+  w_2)$$
 
 And thus, using the derivative rules
 
-$$ \frac{dD}{dw_1} =2[y_j-w_1x_j+w_2]w_1$$
+$$ \frac{\partial D}{\partial w_1} =2[y_j-w_1x_j+w_2]w_1$$
 
 and
 
-$$ \frac{dD}{dw_2} = 2[y_j-w_1x_j+w_2]$$
+$$ \frac{\partial D}{\partial w_2} = 2[y_j-w_1x_j+w_2]$$
 
 Finally, we integrate these ideas into the error function $E$ to find the derivative of the error function with respect each of the the parameters $w_i$
 
 The general rule is:
 
 $$
-r_i = \frac{dE}{dw_i} = \frac{1}{m}\displaystyle\sum^m_{j=0}{\frac{dD}{dw_i}}
+r_i = \frac{\partial E}{\partial w_i} = \frac{1}{m}\displaystyle\sum^m_{j=0}{\frac{dD}{\partial w_i}}
 $$
 
 and so for each $r_i$:
 
 $$
 \begin{align}
-r_1 &= \frac{dE}{dw_1} \\
+r_1 &= \frac{\partial E}{\partial w_1} \\
 &= \frac{1}{m}\sum^m_j{2[y_j-w_1x_j+w_2]w_1}
 \end{align}
 $$
@@ -245,14 +243,14 @@ And
 
 $$
 \begin{align}
-r_2 &= \frac{dE}{dw_2} \\
+r_2 &= \frac{\partial E}{\partial w_2} \\
 &= \frac{1}{m}\sum^m_j{2[y_j-w_1x_j+w_2]}
 \end{align}
 $$
 
 Recall from before that knowing $r_i$ is a measure of how much the error changes with respect to each parameter. Therefore, we can apply our learning rule from before
 $$
-w_{i,t+1}=w_{i,t}-\alpha \frac{dE}{dw_i}
+w_{i,t+1}=w_{i,t}-\alpha \frac{\partial E}{\partial w_i}
 $$
 
 
@@ -299,7 +297,7 @@ I hope this was a good introduction to the theory of numerical optimization. Fro
   7. Try using the distance metric you defined from question (8) to train this model. Compare your results with the training with the original distance metric.
   8. Now regenerate the data but for each datapoint add some random noise from the normal distribution [or just regular uniform random noise]. Redo your plots and see whether random noise changes anything.
 
-**11** Derive an equation for $r$ given a model with the format $f(x, w) = wx$ with the derivative rule $\frac{dD}{dw} = (y-wx)w$
+**11** Derive an equation for $r$ given a model with the format $f(x, w) = wx$ with the derivative rule $\frac{dD}{\partial w} = (y-wx)w$
 
 **12** Implement this model in python using the code you wrote for exercise (10)
 

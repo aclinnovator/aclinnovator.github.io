@@ -5,9 +5,6 @@ author: Akiva Lipshitz
 layout: post
 ---
 
-Introduction
-============
-
 This little work is representative of the early stages of a larger
 theory being formed from nothing. The components of this thought are
 related to each other in deep and possibly hidden ways. I sense greater
@@ -465,15 +462,15 @@ cognition makes.*
 
 **Established Bugs:**
 
--   **Cognitive Load**
+- **Cognitive Load**
 
--   **Availability Heuristic**
+- **Availability Heuristic**
 
--   **Representativeness Heuristic**
+- **Representativeness Heuristic**
 
--   **Familiarity Heuristic**
+- **Familiarity Heuristic**
 
--   **Confirmation Bias**
+- **Confirmation Bias**
 
 Theories to Develop
 ===================

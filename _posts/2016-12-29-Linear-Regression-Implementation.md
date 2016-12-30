@@ -51,7 +51,7 @@ The init method takes `xs`, the set of input $x_i$ input points, `ys` the set of
 In addition, all subclasses must implement three functions: 
 
 - `f` a function of the form `f(x, w)` where `x` is some arbitrary $x$ value, and `w` is a parameter vector. 
-- `r` a function of the which returns a vector the same length as `w` where $$r_i = \frac{dE}{dw_i}$$
+- `r` a function of the which returns a vector the same length as `w` where $$r_i = \frac{\partial E}{\partial w_i}$$
 - `E` the actual error function, as in absolute distance, or mean squared error, etc. Note that `E` is not used in the training but is useful to have handy in the class. 
 
 Now we shall subclass `AbstractRegression` using mean squared error as our error metric:
