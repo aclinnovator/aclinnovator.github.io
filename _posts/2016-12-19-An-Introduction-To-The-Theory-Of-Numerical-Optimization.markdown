@@ -262,6 +262,8 @@ From **theorem 1.1** we know the error is guaranteed to reach a minimum, where $
 
 I hope this was a good introduction to the theory of numerical optimization. From here, we can start talking about more advanced theory, but this is the starting point.
 
+See [the next post in this series](http://theideasmith.github.io/2016/12/29/Linear-Regression-Implementation.html)
+
 ## Exercises
 
 **1** What symbolic form would you use to fit a model with data looking like:  ![enter image description here](https://i.stack.imgur.com/TugFH.png)

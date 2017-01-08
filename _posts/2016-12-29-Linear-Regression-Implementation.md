@@ -120,7 +120,7 @@ predicted = plot(xs, yhat, color='red')
 ```
     [  9.65885386  99.69371247]
 
-![png]({{site.url}}/images/Grid%20Dimensionality%20Minimization%20Problem_files/Grid%20Dimensionality%20Minimization%20Problem_1_0.png)
+![png]({{site.url}}/images/Regression_files/Regression_7_2.png)
 
 
 
