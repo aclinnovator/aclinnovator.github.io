@@ -2,30 +2,34 @@
 otherlangs: he
 layout: post
 author: Akiva Lipshitz
-title: A Tool for Developing an Understanding of Nuance and Subtlety in Gemara
+title: Formal Logic as a Tool for Analyzing Gemara
 date: 12-9-16
 
 ---
 
-# Formal Logic as a Tool for Analyzing Gemara
-
 ## Akiva Lipshitz
 
-### Developed over the course of December 9, 2016 to January 6, 2017
+### Ideated over the course of December 9, 2016 to January 6, 2017
 
-An open mindedness to novel approaches to Gemara learning transforms the formal system of mathematical reasoning into a tool to aid the student – or possibly the expert – in their endeavors to  dissect Gemara and develop a greater appreciation for its nuanced and hidden logical structure. Formal languages offer two innovations: (1) their well defindedness allows for objective exploration of the solution space to an issue. One need only to consider the necessary formal conditions of a solution and contemplate which formal truths lead the system in that direction. (2) expressions in formal languages make much broader implicit statements. Therefore, making a formal statement about an otherwise subjective issue represents a major step in the direction of a solution to the issue.  
+An open mindedness to novel approaches to Gemara learning renders the formal system of mathematics a valuable innovative tool to aid the student of Gemara in their endeavors to dissect and develop a greater appreciation for its highly complex and nuanced logical structure. 
 
-With great trepidation and humility I would like to suggest that the language of mathematics may be employed to reason about certain very well defined aspects of the gemara's logic in order to develop more sophistocated appreciation for the subtle, nuanced and perhaps misunderstood and seemingly convoluted thought process of the gemara.  
+Formal languages offer two possible innovations to Gemara study: (1) their well defindedness makes it easier to theorize about possible situations. Because statements in formal languages are easily permuted or manipulated, the space of possible solutions or reformulations of a formally stated problem can be easily explored. (2) decivingly simple expressions in formal languages can actually be making much broader implicit statements too, which are much easier to discover when the statements themselves are so well defined. Making a formalization of a seemingly intractable issue in Gemara can represent a major step in the direction of a solution. 
 
-I propose a logical model for stating Talmudical assertions. By inspecting a logical model we can  hypothesis solutions. Of course, a formal solution is only relevant if it has a corresponding semantic meaning.  
+Understanding the bold nature of this idea, with great trepidation and humility I would like to suggest that the language of mathematics may be employed to reason about certain very well defined aspects of the gemara's logic. If used correctly, it can actually help yield a more sophistocated appreciation for the subtle, nuanced and perhaps misunderstood and seemingly convoluted thought process of the gemara.  
+
+This short essay will only discuss my initial thoughts on this matter, which I hope to develop in due time into a broader methodology. Perhaps I will discover the methodology is better suited to be used intuitively as opposed to rigorously and formally, and if so, that will be the case. Here, I propose a logical model for stating and analyzing assertions in the Gemara. By inspecting a logical model we can  hypothesis solutions. Of course, a formal solution is only relevant if it has a corresponding semantic meaning.  
 
 Before proceeding to describe the model used here, it is important to bear in mind its idiosyncratic nature. My objective is not to impose a logical structure on the gemara but to find a rigorous model with predictive and descriptive power that best fits the nature of the Gemara's logic itself.  The particular implications and assumptions of the system I use are arbitrary and were made as intuitive guesses as to what kind of a system is best for analyzing the logical flow of the Gemara. 
 
-Some guiding notions to the model are (1) we know we will Talmudic logic is binary; statements are either true or false. (2) there is an obvious axiomatic notion that the Gemara must be internally consistent. Contradictions between statements must either be resolved or one of the statements proven necessarily false; in other words any problem is the result of false assumptions. (3) Talmudical logic can span multiple orders of scope, as per its usage in computer science. The scope of the narrator manages and is aware of the global logic, and comments of sages mentioned therein are usually independent entities of scope relative to the global scope. Our system shall operate at the same level of scope as that of the narrator and not above it. This means the system itself cannot operate on narrative comments as first class objects; the computations that resolve the Gemara must be performed by a human observer and cannot be specified within the system itself. [^1]
+Some guiding notions to the model are
+
+1. That for the most part states in halacha are binary; no states are subjectively defined in the Gemara. Even though the notion of *safek* seems to be probabalistic, it is in fact used as if it were a binary variable.  
+2. There is an obvious axiomatic notion that the Gemara must be internally consistent. Contradictions between statements must either be resolved or one of the statements proven necessarily false; in other words any problem is the result of false assumptions. 
+3. Talmudical logic can span multiple orders of scope, as per its usage in computer science. The scope of the narrator manages and is aware of the global logic, and comments of sages mentioned therein are usually independent entities of scope relative to the global scope. Our system shall operate at the same level of scope as that of the narrator and not above it. This means the system itself cannot operate on narrative comments as first class objects; the computations that resolve the Gemara must be performed by a human observer and cannot be specified within the system itself. [^1]
 
 [^1]: This limitation is similar to most formal mathematics in which the proof creation process cannot be specified at the same level of scope as the mathematical theory itself. The exception to this might be the lambda calculus, although seeing to my having not studied it, this is only a postulation.
 
-With this understanding, consider the following formulation of a system for encapsulating Talmudic logical flows and analyzing them:
+With this understanding, consider the following analysis of a flow of logic at the beginning of Sanhedrin. 
 
 ### Example I
 
@@ -51,39 +55,41 @@ After staring at the first line of the mishna for a while and having some prior 
 
 We shall now attempt to resolve this difficulty by establishing the Gemara in formal terms and proceeding to analyze the formal model. 
 
-The Gemara some set of truths in the gemara, we denote the $n^{th}$ truth as a function of the state $s$ of assumptions and other truths in the system with the notation $P_{n}(s)$. Defining truths as a function of the variable state of the system  allows most inconsistencies in the system to be resolved by proving only one truth for each state of the halachic system. In formal terms, we can resolve seeming inconsistencies by proving injectivity for the statements in question. This formulation acknowledges that in gemara the truth itself is a computative process based on the current assumptions. It is possible and likely that for two different moments in the process of the gemar's *shakla vetarya* there is a logical inconsistency between two truths $P_{n}(s_1) \wedge P_{n}(s_0) = 1$, where $s_1 \ne s_0$but not for the same set of assumptions may there be two different truths. With this in mind, we can begin analyzing the first gemara in Sanhedrin:
+The Gemara has a set of truths and we will denote the $n^{th}$ truth as a function of the state $s$ of assumptions and other truths in the system with the notation $P_{n}(s)$. Defining truths as a function of the variable state of the system  allows most inconsistencies in the system to be resolved by proving that only one truth for each state of the halachic system exists. In other words, if we see that $P(s)$ contradicts $P(s^\prime)$, then in order to avoid an inconsistency we must prove that $s\not = s^\prime$. This formulation of truth statements acknowledges that in gemara the truth itself is a computative process based on the current assumptions. It is possible and likely that for two different moments in the process of the gemar's *shakla vetarya* there is a logical inconsistency between two truths $P_{n}(s_1) \wedge P_{n}(s_0) = 1$, where $s_1 \ne s_0$but for the same set of assumptions there may not be two contradicting truths. With this in mind, we can begin analyzing the first gemara in Sanhedrin:
 
-Let $M$ be the set of words in the first sentence of the mishna, $n$ be the word *mamonot*, $g$ the word *gezelot*, $ch$ the word *chavelot*, and the category denoted by a word $q$  as $C(q)$; so the set of all gezelot cases is $C(g)$. 
+Let $M$ be the set of words in the first sentence of the mishna, and $C_\text{word}$ be the category denoted by the word $word$; so the set of all gezelot cases is $C_\text{gezelot}$. 
 
 The gemara begins with an implied rule, let us call it $R(s_1)$[^2] 
 
-[^ 2]: This is not a definition of the rule function $R(t)$ in the sense that $f(x)= x + 2$ defines the mapping $f$ but a declaration of a specific instance of $R(s=s_1)$ in the sense that $f(x = 2)= 4$.
+[^ 2]: This is not a definition of the rule $R(t)$ in the sense that $f(x)= x + 2$ defines the mapping $f$ but a declaration of a specific instance of $R(s=s_1)$ in the sense that $f(x = 2)= 4$.
 
 $$
-R(s_1): n, g, ch \in M\implies \text{C}(g)  ,  \text{C}(ch) \not\subset C(n)\qquad
+R(s_1): \text{mamonot, gezelot, chavelot} \in M\implies C_\text{gezelot}  ,  C_\text{chavelot} \not\subset C_\text{mamonot} \qquad
 $$
 
-Meaning, that because all three of gezelot, chavelot and mamonot are stated in the mishna instead of only mamonot, the categories of gezelot and chavelot must not be part of the category of mamonot.[^3] We know this from our initial analysis but are restating it formally. 
+Meaning, that because all three of *gezelot*, *chavelot* and *mamonot* are stated in the mishna as dinstinct words, the categories of gezelot and chavelot must not be part of the category of mamonot.[^3] We only *mamonot* stated, we would assume *gezelot*, and *chavelot* to be part of mamonot.  We already know this from our initial analysis but are restating it formally for the sake of demonstration. 
 
 [^3]: There are further assumptions here in terms of what a category is, that mamonot, gezelot and chavelot denote categories, etc. "It is left as an exercise to the reader…"
 
-The mishna having $ n, g, ch \in M$, results in the truth 
+The mishna having $ \text{mamonot, gezelot, chavelot} \in M$, allows us to apply $R(s_1)$ and have $P(s_1)$
 $$
-P(s_1): C(g), C(ch) \not\subset C(n) \qquad
+P(s_1): C_\text{gezelot}  ,  C_\text{chavelot} \not\subset C_\text{mamonot}
 $$
-But $P(s_1)$ contradicts another prior truth for some state $s_0$
+But, as we saw in our initial analysis of the mishna, there is another truth, $P(s_0)$, for some other state $s_0$ that contradicts$P(s_1)$:
 $$
-P(s_0): C(g), C(ch) \subset C(n)
+P(s_0): C_\text{gezelot}  ,  C_\text{chavelot} \subset C_\text{mamonot}
 $$
-This presents the possibility of a contradiction if $s_1=s_0$.
+Now, if $s_0 = s_1$, then we have a contradiction between $P(s_1)$ and $P(s_0)$, and therefore a halachic inconsistency!
 
-In order that the system not be inconsistent, **the gemara must prove that $P(s)$ is injective** for $s\in \{s_1, s_2\}$ (at least locally injective. once we define state and a way of enumerating over states we can prove global injectivity). 
+In order to show this is not so, **the gemara must prove that $P(s)$ is a function** over $s\in \{s_1, s_2\}$, or that $s_1 \not = s_2$. 
 
-Now we have a well defined problem we can endeavor to find a set of states s.t. we may prove $P(s)$ to be injective. We can begin be considering how to permute the assumptions we currently have to arrive at one $s_0\ne s_1$ supporting $P(s_0)$.  Looking back at our initial assumptions, we see that $R(s_1) \implies P(s_1)$. However, we may suggest an alternative state $S_0$ in which $R(s_) \not \implies P(s_1)$. This would manifest itself in the implication
+## Making the Move
+
+Now that we have a well defined problem we can endeavor to find a set of states s.t. we may prove $P(s)$ to be a function as opposed to just a relation. We can begin our approach by considering how to permute our current assumptions with the hopes that we will arrive at a point where it is likely that $s_0\ne s_1$ , which would show no inconsistency. Looking back at our initial assumptions, we see that $R(s_1) \implies P(s_1)$. This means that if we can find some other rule $s_0$ for  which $R(s_0) \not \implies P(s_1)$, but $R(s_0) \implies P(s_0)$ then we will have negated the inconsistency by showing that $P(s_1)$ and $P(s_0)$ actually emerge from two different states. Well that is not difficult: all we must do is propose another rule $R(s_0)$ as the converse of $R(s_1)$:
 $$
-R(s_0): n, g, ch \in M \not\implies C(g), C(ch) \not\subset C(n) \qquad
+R(s_0):  \text{mamonot, gezelot, chavelot} \in M \not\implies C_\text{gezelot}  ,  C_\text{chavelot} \not\subset C_\text{mamonot} \qquad
 $$
-or alternatively, we may define $R(s_0)$ as 
+or, not stating $R(s_0)$ in the double negative: 
 $$
 R(s_0): n, g, ch \in M \implies C(g), C(ch) \subset C(n) \qquad
 $$
@@ -91,7 +97,7 @@ either way, we have an $s_0$ such that
 $$
 R(s_0)\implies P(s_0)
 $$
-which means there is some state $s_0$ in which $P(s_0)$ is true. If these two states are different and we can prove $R(s)$ is injective on $\{s_0, s_1\}$ then  $P(s)$ is also injective and therefore there is no inconsistency. Now we have a prediction of what might resolve the gemara's question of inconsistency, let us read ahead to see how the gemara answers: 
+which means that  is some state $s_0$ in which $P(s_0)$ is true. Now, $R$ is the line of distinction between $P(s_0)$ and $P(s_1)$. If we can be certain that for any $s$ there is exactly one $R(s)$ then we will have proved there is no inconsistency. This is a much greater challenge which I am not equipped to solve. 
 
 > אמר רבי אבהו – Rabbi Abahu said
 >
@@ -100,8 +106,6 @@ which means there is some state $s_0$ in which $P(s_0)$ is true. If these two st
 > מה הן דיני ממונות גזילות וחבלות  – [In order that we should know] What are monetary cases? [They are] Thefts and injuries. 
 
 In other words, Rav Abahu is suggesting the second of our two predictions for $R(s_0)$. This possibility was implicit in our formalization of the logic. Here we see that as soon as a local halachic situation can be fully formulated, the resolution to a claim of inconsistency may be found to be implied by the formulation itself. 
-
-The inquisitive reader may already have asked the great question: how to prove $R(s)$ is injective so that it is certain there is no inconsistency on $R$. We must prove $s_0\ne s_1$. However, we must be vigilant not to attempt to prove consistency of an arbitrary order distinction between the meta rules governing $R$. If so, we will will spiral into a trap of recursion or else circular logic unless we ultimately define some axioms governing $s$ which may be a function of any number of things; a function of location, a function of individual, etc.
 
 Now, realize that precisely when we try to define a function for state, does halacha refuse to be modellable and instead necessarily become a product of human intuition. [^5] Therefore we assume that the state function is at least continuous whatever that means [^6] so that halacha is locally modellable for the purposes of analyzing it.
 
