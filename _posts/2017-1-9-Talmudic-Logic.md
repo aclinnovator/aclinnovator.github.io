@@ -68,11 +68,11 @@ After staring at the first line of the mishna for a while and having some prior 
 
 ---
 
-Let $M$ be the set of words in the first sentence of the mishna, and $C_\text{word}$ be the category denoted by the word $word$; so the set of all gezelot cases is $C_\text{gezelot}$. 
+Let $M​$ be the set of words in the first sentence of the mishna, and $C_\text{word}​$ be the category denoted by the word $word​$; so the set of all gezelot cases is $C_\text{gezelot}​$. 
 
 The gemara begins with an implied rule, let us call it $R(s_1)$[^2] 
 
-[^ 2]: This is not a definition of the rule $R(t)$ in the sense that $f(x)= x + 2$ defines the mapping $f$ but a declaration of a specific instance of $R(s=s_1)$ in the sense that $f(x = 2)= 4$.
+[^2]: This is not a definition of the rule $R(t)$ in the sense that $f(x)= x + 2$ defines the mapping $f$ but a declaration of a specific instance of $R(s=s_1)$ in the sense that $f(x = 2)= 4$.
 
 
 $$
