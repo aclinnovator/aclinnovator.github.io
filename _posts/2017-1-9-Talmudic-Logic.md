@@ -67,13 +67,21 @@ Meaning, that because all three of *gezelot*, *chavelot* and *mamonot* are state
 [^3]: There are further assumptions here in terms of what a category is, that mamonot, gezelot and chavelot denote categories, etc. "It is left as an exercise to the reader…"
 
 The mishna having $ \text{mamonot, gezelot, chavelot} \in M$, allows us to apply $R(s_1)$ and have $P(s_1)$
+
+
 $$
 P(s_1): C_\text{gezelot}  ,  C_\text{chavelot} \not\subset C_\text{mamonot}
 $$
+
+
 But, as we saw in our initial analysis of the mishna, there is another truth, $P(s_0)$, for some other state $s_0$ that contradicts$P(s_1)$:
+
+
 $$
 P(s_0): C_\text{gezelot}  ,  C_\text{chavelot} \subset C_\text{mamonot}
 $$
+
+
 Now, if $s_0 = s_1$, then we have a contradiction between $P(s_1)$ and $P(s_0)$, and therefore a halachic inconsistency!
 
 In order to show this is not so, **the gemara must prove that $P(s)$ is a function** over $s\in \{s_1, s_2\}$, or that $s_1 \not = s_2$. 
@@ -81,17 +89,29 @@ In order to show this is not so, **the gemara must prove that $P(s)$ is a functi
 ## Making the Move
 
 Now that we have a well defined problem we can endeavor to find a set of states s.t. we may prove $P(s)$ to be a function as opposed to just a relation. We can begin our approach by considering how to permute our current assumptions with the hopes that we will arrive at a point where it is likely that $s_0\ne s_1$ , which would show no inconsistency. Looking back at our initial assumptions, we see that $R(s_1) \implies P(s_1)$. This means that if we can find some other rule $s_0$ for  which $R(s_0) \not \implies P(s_1)$, but $R(s_0) \implies P(s_0)$ then we will have negated the inconsistency by showing that $P(s_1)$ and $P(s_0)$ actually emerge from two different states. Well that is not difficult: all we must do is propose another rule $R(s_0)$ as the converse of $R(s_1)$:
+
+
 $$
 R(s_0):  \text{mamonot, gezelot, chavelot} \in M \not\implies C_\text{gezelot}  ,  C_\text{chavelot} \not\subset C_\text{mamonot} \qquad
 $$
+
+
 or, not stating $R(s_0)$ in the double negative: 
+
+
 $$
 R(s_0): n, g, ch \in M \implies C(g), C(ch) \subset C(n) \qquad
 $$
+
+
 either way, we have an $s_0$ such that
+
+
 $$
 R(s_0)\implies P(s_0)
 $$
+
+
 which means that  is some state $s_0$ in which $P(s_0)$ is true. Now, $R$ is the line of distinction between $P(s_0)$ and $P(s_1)$. If we can be certain that for any $s$ there is exactly one $R(s)$ then we will have proved there is no inconsistency. This is a much greater challenge which I am not equipped to solve. 
 
 > אמר רבי אבהו – Rabbi Abahu said
