@@ -3,7 +3,7 @@ otherlangs: he
 layout: post
 author: Akiva Lipshitz
 title: Formal Logic as a Tool for Analyzing Gemara
-date: : 2017-1-6
+date:   2017-1-6
 ---
 
 ## Akiva Lipshitz
