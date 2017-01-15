@@ -6,11 +6,7 @@ title: Formal Logic as a Tool for Analyzing Gemara
 date:   2017-1-6
 ---
 
-## Akiva Lipshitz
-
-### Ideated over the course of December 9, 2016 to January 6, 2017
-
-An open mindedness to novel approaches to Gemara learning renders the formal system of mathematics a valuable innovative tool to aid the student of Gemara in their endeavors to dissect and develop a greater appreciation for its highly complex and nuanced logical structure. 
+The formal system of mathematics can be used as an innovative tool in the study of Gemara. It offers great value as a technique for the student to use in their endeavors to dissect and develop a greater appreciation for the Gemara's highly complex and nuanced logical structure. 
 
 Formal languages offer two possible innovations to Gemara study: (1) their well defindedness makes it easier to theorize about possible situations. Because statements in formal languages are easily permuted or manipulated, the space of possible solutions or reformulations of a formally stated problem can be easily explored. (2) decivingly simple expressions in formal languages can actually be making much broader implicit statements too, which are much easier to discover when the statements themselves are so well defined. Making a formalization of a seemingly intractable issue in Gemara can represent a major step in the direction of a solution. 
 
