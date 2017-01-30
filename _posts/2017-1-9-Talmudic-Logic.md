@@ -164,6 +164,8 @@ I was conceptualizing a software system in which one may interact with Talmudic 
 
 At its core the system would be built atop a computational logic system, and therefore to a certain limited extent would be able to compute answers to questions. It could compute assumptions of an assertion or find the set of node states, including possibly discovering latent states, necessary for a certain assertion to be true or false or prove that no such state exists. What is the total set of conditions in which $X$ is liable for $Y$? I can imagine a very polished instance of this software actually igniting people's latent appreciation for the tremendous order and brilliance of the Gemara's thought process.
 
+I take these ideas futher in [this other paper currently being worked on](https://www.dropbox.com/s/8ze669u62wocquh/Gemara%20Logic.pdf?dl=0). 
+
 ---
 
 
