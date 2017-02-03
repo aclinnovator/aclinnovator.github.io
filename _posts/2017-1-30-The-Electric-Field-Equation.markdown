@@ -5,7 +5,9 @@ layout: post
 date: 2017-1-30
 ---
 
-After much though about how to generalize the equation for field, I realized what was getting me stuck was my ignoring $\hat{r}$ in the equation. 
+This is a prelude to the post [where I actually do computational modelling of point charge dynamics]({{site.url}}/2017/02/02/Differential-Equations-For-Modelling-Point-Charge.html) 
+
+After much thought about how to generalize the equation for electric field, I realized what was getting me stuck was my ignoring the $\hat{r}$ in the equation. 
 
 Now, substituting $\vec{\mathbb{r}} -\vec{\mathbb{x}}_\text{relative} $, we can "write down" a general electric field equation as a volume integral through the solid $\Omega$:
 
