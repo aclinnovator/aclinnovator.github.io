@@ -235,8 +235,12 @@ plt.show()
 
 [Download this post as an ipython notebook](https://gist.github.com/5f52c2bc414a744953e1c69970590f9d)
 
+## Videos
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kblQj2h0eJ0" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/B1RTjIBA6OQ" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MG-n7eYxbvQ" frameborder="0" allowfullscreen></iframe>
 
+## Path Plot
 ![png]({{site.url}}/images/electricity_files/electricity_12_0.png)
 
 
