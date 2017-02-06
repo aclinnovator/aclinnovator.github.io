@@ -23,7 +23,7 @@ $$\vec{F}_{j \to i} = k\frac{q_iq_j}{\left|\vec{r}_i-\vec{r}_j\right|^2}\hat{r}_
 
 where 
 
-$$\hat{r}_{ij} = \vec{r}_i-\vec{r}_j$$
+$$\hat{r}_{ij} =\frac{ \vec{r}_i-\vec{r}_j}{\left|r_i-r_j\right|}$$
 
 Now, the net *marginal* force on particle $q_i$ is given as the sum of the pairwise forces
 
@@ -31,7 +31,9 @@ $$\vec{F}_{N, i} = \sum_{j \ne i}{\vec{F}_{j \to i}}$$
 
 And then the net acceleration of particle $q_i$ just normalizes the force by the mass of the particle:
 
-$$\vec{a}_i = \frac{\vec{F}_{N, i}}{m_i}$$
+$$\ddot{\vec{r}}_i = \frac{\vec{F}_{N, i}}{m_i}$$
+
+In total, for $n$ particles, we have $n$ differential equations. Furthermore, we need to specifiy $n$ initial particle velocities to solve a particular instance of the differential equations. 
 
 To implement this at scale, we're going to need to figure out a scheme for vectorizing all these operations, demonstrated below. 
 
@@ -42,81 +44,69 @@ We'll be using `scipy.integrate.odeint` for our numerical integration. Below, th
 import numpy as np
 import numpy.ma as ma
 from scipy.integrate import odeint
-mag = lambda r: np.sqrt(np.sum(np.power(r, 2)))
 
-def g(y, t, q, m, n,d, k):
-    """
-    n: the number of particles
-    d: the number of dimensions 
-      (for fun's sake I want this 
-      to work for k-dimensional systems)
-    y: an (n*2,d) dimensional matrix 
-        where y[:n]_i is the position
-        of the ith particle and
-        y[n:]_i is the velocity of 
-        the ith particle
-    qs: the particle charges
-    ms: the particle masses
-    k: the electric constant
-    t: the current timestamp
-    """
-#     r1, r2, dr1dt, dr2dt = np.copy(y.reshape((n*2,d)))
-#     F = -1./mag(r2-r1)**2
-
-#     dy = [
-#      dr1dt,
-#      dr2dt,
-#      (F)*(r1-r2),
-#      (F)*(r2-r1),
-#     ]
+def integrator_func(y, t, q, m, n, d, k):
     y = np.copy(y.reshape((n*2,d)))
-
     # rj across, ri down
     rs_from = np.tile(y[:n], (n,1,1))
-
     # ri across, rj down
     rs_to = np.transpose(rs_from, axes=(1,0,2))
-
     # directional distance between each r_i and r_j
     # dr_ij is the force from j onto i, i.e. r_i - r_j
     dr = rs_to - rs_from
-
     # Used as a mask
     nd_identity = np.eye(n).reshape((n,n,1))
-
     # Force magnitudes
     drmag = ma.array(
-        np.sqrt(
-            np.sum(
-                np.power(dr, 2), 2)), 
-        mask=nd_identity)
-
+        np.power(
+            np.sum(np.power(dr, 2), 2)
+        ,3./2)
+        ,mask=nd_identity)
     # Pairwise q_i*q_j for force equation
     qsa = np.tile(q, (n,1))
     qsb = np.tile(q, (n,1)).T
     qs = qsa*qsb
-
-    
     # Directional forces
-    Fs = (-qs/np.power(drmag,2)).reshape((n,n,1))
-
+    Fs = (k*qs/drmag).reshape((n,n,1))
     # Dividing by m to obtain acceleration vectors
     a = np.sum(Fs*dr, 1)
-
-    # Sliding integrated acceleration
-    # (i.e. velocity from previous iteration)
-    # to the position derivative slot
+    # Setting velocities
     y[:n] = np.copy(y[n:])
-
     # Entering the acceleration into the velocity slot
     y[n:] = np.copy(a)
     # Flattening it out for scipy.odeint to work
-    return np.array(y).reshape(n*2*d)  
-
-
+    return np.array(y).reshape(n*2*d)
 ```
 
-Let's define our time intervals, so that odeint knows which time stamps to iterate over. 
+Let's write a general function for simulating particles:
+
+```python
+def sim_particles(t, r0, v0, q, m, k=1.):
+  	"""
+  	With n particles in d dimensions:
+  	
+  	t: timepoints to integrate over
+  	r: n*d matrix. The d-dimensional initial positions of n particles
+  	v: n*d matrix of initial particle velocities
+  	q: n*1 matrix of particle charges
+  	m: n*1 matrix of particle masses
+  	k: electric constant.
+  	"""
+    d = r0.shape[-1]
+    n = r0.shape[0]
+    y0 = np.zeros((n*2,d))
+    y0[:n] = r0
+    y0[n:] = v0
+    y0 = y0.reshape(n*2*d)
+    yf = odeint(
+        integrator_func,
+        y0,
+        t,
+        args=(q,m,n,d,k)).reshape(t.shape[0],n*2,d)
+    return yf
+```
+
+Now, we'll create a timepoint vector to integrate the differential equations over: 
 
 
 ```python
@@ -153,7 +143,6 @@ We get to choose the initial positions and velocities of our particles. For our 
 
 
 ```python
-
 r1i = np.array([-2., 0.0])
 dr1dti = np.array([3.,0.])
 
@@ -168,7 +157,8 @@ And pack them into an initial state variable we can pass to odeint.
 
 
 ```python
-y0 = np.array([r1i, r2i, r3i, dr1dti, dr2dti, dr3dti]).reshape(n*2*d)
+r0 = np.array([r1i, r2i, r3i])
+v0 = np.array([dr1dti, dr2dti, dr3dti])
 ```
 
 ## The Fun Part – Doing the Integration
@@ -178,12 +168,10 @@ Now, we'll actually do the integration
 
 ```python
 # Doing the integration
-yf = odeint(g, y0, t, args=(q,m,n,d,k)).reshape(t_f,n*2,d)
-
+yf = sim_particles(t, r0, v0, q, m)
 ```
 
-    /Library/Python/2.7/site-packages/ipykernel/__main__.py:60: RuntimeWarning: divide by zero encountered in divide
-
+And finally, we'll plot our results:
 
 
 ```python
@@ -196,7 +184,6 @@ fig = plt.figure(figsize=(20,20))
 ax = fig.add_subplot(111)
 ys1 = yf[:,0,1]
 xs1 = yf[:,0,0]
-
 
 xs2 = yf[:,1,0]
 ys2 = yf[:,1,1]
@@ -212,25 +199,14 @@ ax.plot(xs2[-1:], ys2[-1:], 'rv')
 
 ax.plot(xs3[:1], ys3[:1], 'bv')    
 ax.plot(xs3[-1:], ys3[-1:], 'rv') 
-# 
-# minx = np.min(y[:,[0,2],0]) 
-# maxx = np.max(y[:,[0,2],0]) 
-
-# miny = np.min(y[:,[0,2],1]) 
-# maxy = np.max(y[:,[0,2],1])
                                          
 ax.plot(xs1, ys1)                      
 ax.plot(xs2, ys2)    
 ax.plot(xs3, ys3)                      
 
-
-# plt.xlim(xmin=minx, xmax=maxx)
-# plt.ylim(ymin=miny, ymax=maxy)
-
 plt.title("Paths of 3 Colliding Electric Particles")
 plt.ion()
 plt.show()
-
 ```
 
 [Download this post as an ipython notebook](https://gist.github.com/5f52c2bc414a744953e1c69970590f9d)
