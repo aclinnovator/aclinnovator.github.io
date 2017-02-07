@@ -1,4 +1,8 @@
-## Combinatorics Reveals Additional Structure on the First Daf of Bava Kamma
+---
+layout: post
+author: Akiva Lipshitz
+title: Combinatorics to Help Understand the First Daf of Bava Kamma
+---
 
 My brother and I just began the first perek of Gemara Bava Kamma. Bava Kamma initializes by listing four instances, which it calls *avot*, for which the halachot of nezikin apply. Rashi[^1] notes the term *avot* , literally translated as *father*, denotes category. The four categories of *nezikin* damages listed by the mishna are learned directly from Parshat Mishpatim. In subsequent dapim, the Gemara will derive the corollories of these overarching *avot nezikin* categories. 
 
