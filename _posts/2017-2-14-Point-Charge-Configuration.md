@@ -134,4 +134,4 @@ solutions:
 
 And see the solution is for $N=12$
 
-![image](/Users/akivalipshitz/Columbia16/SemesterII/PhysII/csc.png)
+![image]({{site.url}}/images/Charge_Configuration.png)
