@@ -2,6 +2,7 @@
 title: Potential of Point Charges Distributed Around a Circle
 author: Akiva Lipshitz
 date: 2017-2-14
+layout: post
 ---
 
 The following very nasty question came up in my physics homework this
