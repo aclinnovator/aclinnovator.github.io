@@ -12,7 +12,9 @@ Arguably, one of the most powerful developments in early modern applied mathemat
 $$
 \arg\max _x f(x)
 $$
+
 by solving a dynamical system 
+
 $$
 \mathbf{w}_{t+1} := \mathbf{w}+\lambda(\mathbf{w}\mid \mathbf{x}, \mathbf{y})
 $$
@@ -82,8 +84,7 @@ $$
 There are two cases to consider and we now go through them:
 
 If 
-
-$$\alpha\frac{\mathbf{x_i}\cdot\mathbf{x_i}}{N} + 1 \le 1$i$
+$$\alpha\frac{\mathbf{x_i}\cdot\mathbf{x_i}}{N} + 1 \le 1$$
 
 then 
 
