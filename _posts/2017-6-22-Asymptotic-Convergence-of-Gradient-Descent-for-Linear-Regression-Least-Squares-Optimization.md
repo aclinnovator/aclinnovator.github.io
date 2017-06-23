@@ -112,7 +112,7 @@ $$
 A = \left[ -2\frac{N}{|\mathbf{x}|^2},  -1\right] \cap \left[-\frac{N}{|\mathbf{x}|^2}, 0 \right]
 $$
 
-Equation (12) could have been recognized as a geometric series and is not rewritten as such:
+Equation (12) could have been recognized as a geometric series and is now rewritten as such:
 
 $$
 w_{it} = \beta_{i2}^t w_0+ \beta_{i1}\frac{1-\beta_{i2}^{t+1}}{1-\beta_{i2}}
