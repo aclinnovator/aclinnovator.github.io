@@ -1,11 +1,9 @@
 ---
-title: Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization
+title: A Bifurcation Point in the Learning Dynamics of Gradient Descent in Linear Least Squares Regression 
 author: Akiva Lipshitz
 date: June 22, 2017
 layout: post
 ---
-
-
 
 Arguably, one of the most powerful developments in early modern applied mathematics is that of gradient descent, which is a technique for solving programs of the form
 
@@ -34,12 +32,9 @@ $$
 &= -\alpha \mathbf{x}_i\cdot\mathbf{y}\frac{1}{N} + w_{i,t}\alpha \mathbf{x}_i\cdot\mathbf{x}_i\frac{1}{N}
 \end{align}
 $$
-
-Observe in this linear task the dynamics of each weight $w_i$ is independent of that of any other weight. We can simplify equation (2) by writing $\beta_ {i1}= -\alpha\mathbf{x_i}\cdot\mathbf{y}\frac{1}{N}$ and $\beta_{i2}=\alpha\mathbf{x}_i \cdot\mathbf{x}_i\frac{1}{N}$, such that 
-
-
+Observe in this linear task the dynamics of each weight $w_i$ is independent of that of any other weight. We can simplify equation (2) by writing $\beta_ {i1}= - \alpha\mathbf{x_i}\cdot\mathbf{y}\frac{1}{N}$ and $\beta_{i2}=\alpha\mathbf{x}_i \cdot\mathbf{x}_i\frac{1}{N}$, such that 
 $$
-\Delta w_{i,t} = \alpha\beta_{i1}+\alpha\beta_{i2}w_{it}
+\Delta w_{i,t} = \beta_{i1}+\beta_{i2}w_{it}
 $$
 
 We would like to analyze the asymptotic behavior of this dynamical system and to do so we need an analytical expression for $w_{i,t}$. First, we will produce an update rule
@@ -49,7 +44,6 @@ w_{i,t+1} = \beta_{i1}+w_{it} (\beta_{i2}+1)
 $$
 
 which we recognize as a one dimensional autoregressive process with an affine term. We can recursively compose equation (5) with itself, using $w_{i,0} \sim \mathcal{N}(\mu, \sigma)$ as initial conditions. This is a bit of a tedious computation that results in a closed form polynomial expression. We simplify the indices in the computation by assuming it holds for all $w_i$. Thus subscripts in the computation on $w$ refer to iterations, with dimension implied. 
-
 $$
 \begin{align}
 w_{0} &= w_0\\
@@ -72,67 +66,118 @@ $$
 \lim\limits_{t\to\infty} \left [w_{it} = (\beta_{i2}+1)^t w_{i0}+\beta_{i1}\sum\limits^{t-1}_{j=1}(\beta_{i2}+1)^j \right] =\ ?
 $$
 
-Both terms in (8) converge if $-1 \le \beta_{i2}+1 \le 1$. Recalling from before $\beta_{i2} =\alpha\mathbf{x_i}\cdot\mathbf{x_i}\frac{1}{N}$, 
+Both terms in (8) converge if $-1 < \beta_{i2}+1 < 1$. Recalling from before $\beta_{i2} =\alpha\mathbf{x_i}\cdot\mathbf{x_i}\frac{1}{N}$, 
 
 $$
 \begin{align}
--1 \le &\beta_{i2}+1  \le 1 \\
--1 \le &\alpha\frac{\mathbf{x_i}\cdot\mathbf{x_i}}{N} + 1 \le 1 \\
+-1 < &\beta_{i2}+1  <1 \\
+-1 < &\alpha\frac{\|\mathbf{x}\|^2}{N} + 1 < 1 \\
 \end{align}
 $$
 
 There are two cases to consider and we now go through them:
 
 If 
-$$\alpha\frac{\mathbf{x_i}\cdot\mathbf{x_i}}{N} + 1 \le 1$$
 
+$$
+0 \le \alpha\frac{\|\mathbf{x}\|^2}{N} + 1 < 1
+$$
 then 
 
-$$-1 \le\alpha\frac{\mathbf{x_i}\cdot\mathbf{x_i}}{N} \le 0i$$
-
+$$
+-1 \le \alpha\frac{\|\mathbf{x}\|^2}{N} < 0
+$$
 Thus 
 
-$$-1 \le  \frac{\alpha}{N}|\mathbf{x}|^2 \le 0$$
+$$
+-1 \le  \frac{\alpha}{N}|\mathbf{x}|^2 < 0
+$$
 
 This leads to the bounds
 
 $$
--\frac{N}{|\mathbf{x}|^2}\le \alpha \le 0
+-\frac{N}{\|\mathbf{x}\|^2} \le \alpha< 0
 $$
 
-The second case to consider is that of $-1 \le \alpha\frac{\mathbf{x_i}\cdot\mathbf{x_i}}{N} + 1 \le 0$. Here, using a similar thought process
+The second case to consider is that of $-1 < \alpha\frac{\mathbf{x_i}\cdot\mathbf{x_i}}{N} + 1 \le 0$. Here, using a similar thought process
 
 $$
--2\frac{N}{|\mathbf{x}|^2} \le \alpha \le -1
+-2\frac{N}{\|\mathbf{x}\|^2} < \alpha \le -\frac{N}{\|\mathbf{x}\|^2}
 $$
 
-We now take the intersection of the sets defined by (17) and (18) as valid $\alpha$ values, naming it $A$
+We now take the union of the sets defined by (17) and (18) as valid $\alpha$ values, naming it $A$. $A$ is expressed in terms of its components because the inner bound is actually significant as it is the *optimal* $\alpha$ value that leads to convergence in one step. 
 
 $$
-A = \left[ -2\frac{N}{|\mathbf{x}|^2},  -1\right] \cap \left[-\frac{N}{|\mathbf{x}|^2}, 0 \right]
+A_i = \left( -2\frac{N}{\|\mathbf{x}_i\|^2},  -\frac{N}{\|\mathbf{x}\|^2}\right] \cup \left[-\frac{N}{\|\mathbf{x}_i\|^2}, 0 \right)
 $$
+
+## A Closed Form Expression
 
 Equation (12) could have been recognized as a geometric series and is now rewritten as such:
 
 $$
-w_{it} = \beta_{i2}^t w_0+ \beta_{i1}\frac{1-\beta_{i2}^{t+1}}{1-\beta_{i2}}
+w_{it} = (\beta_{i2}+1)^t w_0+ \beta_{i1}\frac{1-(\beta_{i2}+1)^{t}}{\beta_{i2}}
 $$
 
-Substitute $\beta$ values for the promised closed form expression:
+Substitute $\beta$ values  and with some algebra we arrive at the promised closed form expression. That such an equation exists is a rarity. As such, the author believes equation (24) ought to be handled with utmost care and placed deep in a Gringots vault for safekeeping, far from the prying eyes of those nasty adversarial networks. 
 
 $$
-w_{it} = \alpha^t\left (\mathbf{x_i}\cdot\mathbf{x_i}\frac{1}{N}\right)^t w_0-\frac{\alpha-\alpha^{t}\left (\mathbf{x_i}\cdot\mathbf{x_i}\frac{1}{N}\right)^{t+1}}{1-\alpha \left (\mathbf{x_i}\cdot\mathbf{x_i}\frac{1}{N}\right)}\left(\mathbf{x_i}\cdot\mathbf{y}\frac{1}{N}\right)
+w_{it} = \left[\alpha\frac{\|\mathbf{x}_i\|^2}{N} + 1\right]^t w_0-\left[\frac{\mathbf{x_i}\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2} \right]\left[1-\left(\alpha\frac{\|\mathbf{x}_i\|^2}{N} + 1\right)^t\right]
 $$
 
-It is now clear to see if $\alpha \not\in A$ then (20) diverges. 
+It is now clear to see if $\alpha \not\in A$ then (24) diverges. 
 
-We have tested these results in python simulations and have found that indeed with $\alpha$ values above an upper bound $\alpha \le \frac{N}{\mathbf{x}_i\cdot\mathbf{x_i}}$ , regression diverges, and the opposite of true for $\alpha < \frac{N}{\mathbf{x}_i\cdot\mathbf{x}_i}$. 
+We have tested these results in python simulations and have found that indeed with $\alpha$ values above the upper bound $\alpha \le -\frac{N}{\mathbf{x}_i\cdot\mathbf{x_i}}$ , the system converges, and the opposite for  $\alpha  > -\frac{N}{\| \mathbf{x}_i\|^2}$. 
 
 ## The Dynamics of the Learning Process
 
-Having obtain a nice analytical expression for valid $\alpha$ values, we would like to understand the  actual learning dynamics. Specifically, how is asymptotic convergence affected by the choice of $\alpha$? 
+Having obtained a nice analytical expression for valid $\alpha$ values, we would like to understand the  actual learning dynamics.How is asymptotic convergence affected by the choice of $\alpha$? What is the value of the limit in equation (14)? 
 
-There are a few interesting observations to make. Firstly, equation (20) is monotonically increasing and in the limit all lower order terms drop out and the rate of convergence is of the order $\mathcal{O}(\alpha^t)$. We can then write the characteristic timescale of convergence $\tau = \frac{1}{\alpha^t}$ which is exponentially small. Thus we will observe very fast convergence. 
+There are a few interesting initial observations to make.
+
+(**1**) From equation (4), we can easily see that if $$\hat{y}_j=y_j$$ then $\Delta w_{i,t}=0$. Thus the true solution is a stable point regardless of $\alpha$. 
+
+(**2**) Equation (20) is either monotonically increasing or decreasing. In the limit $t \to \pm\infty$, all lower order terms drop out and the rate of convergence is of the order $\mathcal{O}(\alpha^t)$.
+
+(**3**) We can then write the characteristic timescale of convergence $\tau = \frac{1}{\alpha^t}$ which is exponentially small. Thus we will observe very fast convergence. 
+
+It is worthwhile as an exercise to study the dynamics of the learning system under the extremal values of $\alpha$. 
+
+
+(**1**) $\alpha = 0$, *stable*. In this case, the weights should diverge linearly. However, because $\beta_{i,1}$ depends on $\alpha$ and $\beta_{i1}$ is also the constant multiple in the geometric series, the sum itself vanishes and the trajectory is stationary. 
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_2.png)
+
+(**2**) $\alpha = -\frac{N}{\|\mathbf{x}_i\|^2}$, *stable*. Plugging this into (24) yields an expression 
+
+$$
+w_t = 0^t\left(w_0 + \frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}\right)+\frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}
+$$
+This is actually interesting because the system converges in one iteration. The first term vanishes for $t>0$, such that the closed form solution is $\frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}$
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_4.png)
+
+(**3**) $\alpha = -2\frac{N}{\|\mathbf{x}_i\|^2}$, *unstable*.By plugging in this value of $\alpha$, we get a divergent oscillator. This is effectively a damped oscillator if viewed backwards in time.
+
+$$
+w_t =(-1)^t w_0 + \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}\left((-2)^t -1\right)
+$$
+
+By neglecting the terms with constant magnitude, we can rewrite (26) to emphasize its nature as a divergent oscillator. If we look back  at our work, (26) oscillates only because gradient descent looks for the direction of descent, which is the negative of the error gradient with respect to weights. 
+
+$$
+w_t =  \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}e^{t \ln 2}e^{ i\pi t}
+$$
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_7.png) 
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_8.png) 
+
+
+## Dynamical Bifurcations
+
+At this point we have identified some significant $\alpha$ values and studied the dynamics of the system under such values. To review, we observed stationary dynamics for $\alpha=0$, logistic growth or decay for $\alpha = -N/{\| x \|^2}$, and oscillatory divergence for  $\alpha = -2N/{\|x\|^2}$. Now, notice our equations are continuous for all values of $\alpha$. Thus, with equation (24) we can continuously interpolate between these the distinct dynamical regimes. 
+
+The boundary points of the set $A$ are dynamical bifurcation points. Suppose the boundary points of $A$ are used to dissect the real line into disjoint subsets. The qualitative behavior of learning dynamics is distinct for values of $\alpha$ picked from each of these subsets. 
 
 ## Conclusion
 
@@ -168,7 +213,8 @@ grad = lambda ys, yhs, xs: \
 delta = lambda gs, a: \
     a*gs
     
-def regress(y, x, alpha, T=1000):
+def regress(y, x, alpha, T=1000, wh=None, **kwargs):
+
     wh = random.normal(2, size=2)
     whs = zeros((T, 2))
     whs[0,:] = wh
@@ -180,7 +226,7 @@ def regress(y, x, alpha, T=1000):
 
 
 ```python
-def regrSample(y, x, alpha, T=1000, N=10):
+def regrSample(y, x, alpha, T=1000, N=10, **kwargs):
     out = map(
         lambda a: \
         regress(y,x, alpha, T=T), xrange(N)
@@ -199,16 +245,46 @@ def statsRegr(*args, **kwargs):
 
 The theoretically derived bounds on $\alpha$ are 
 
-$$\alpha \in  \left[ -2\frac{N}{|\mathbf{x}|^2}, -1\right] \cap \left[-\frac{N}{|\mathbf{x}|^2}, 0 \right]$$
+$$\alpha \in  \left( -2\frac{N}{|\mathbf{x}|^2}, 0 \right]$$
 
 Other $\alpha$ values diverge
 
 
 ```python
-alphaOver = -10*N/linalg.norm(x[0,:])**2  
-alphaUnder = -N/linalg.norm(x[0,:])**2  
-muOver, sigOver = statsRegr(y, x, alphaOver, T=T, N=10)
-muUnder, sigUnder = statsRegr(y, x, alphaUnder, T=T, N=10)
+def plotDynamicsForAlpha(alpha, axTitle, T=1000, N=10):
+    t = np.arange(T)
+    mu, sig = statsRegr(y, x, alpha, T=T, N=N)
+    plot(mu[:,0], 'r:', label='$w_1$')
+    plot(mu[:,1], 'b:', label='$w_2$')
+    fill_between(t, \
+                 mu[:,0]+sig[:,0], \
+                 mu[:,0]-sig[:,0], \
+                 facecolor='red', alpha=0.5)
+    fill_between(t,\
+                 mu[:,1]+sig[:,1], \
+                 mu[:,1]-sig[:,1], \
+                 facecolor='blue', alpha=0.5)
+    xlabel("t [Iterations]", fontdict={'fontsize':fs*.8})
+    yl = ylabel("$w_{i,t}$",fontdict={'fontsize':fs*.8})
+    yl.set_rotation('horizontal')
+    title(axTitle, fontdict={'fontsize':fs})
+    return mu, sig
+
+
+```
+
+
+```python
+alphaData = [
+    ("a=2", 2),
+    ("a=0",0.),
+    ("a=-0.5N/x^2",-0.5*N/linalg.norm(x[0,:])**2),
+    ("a=-N/x^2", -N/linalg.norm(x[0,:])**2),
+    ("a=-1.3N/x^2", -1.3*N/linalg.norm(x[0,:])**2),
+    ("a=-1.6N/x^2", -1.6*N/linalg.norm(x[0,:])**2),
+    ("a=-1.99N/x^2", -1.99*N/linalg.norm(x[0,:])**2),
+    ("a=-2N/x^2", -2*N/linalg.norm(x[0,:])**2)
+]
 ```
 
 
@@ -217,46 +293,50 @@ muUnder, sigUnder = statsRegr(y, x, alphaUnder, T=T, N=10)
 from scipy.stats import norm
 import seaborn as sns
 fs = 15
-t = np.arange(T)
-figure(figsize=(10,6))
-subplot(2,1,1)
-plot(muOver[:,0], 'r:', label='$w_1$')
-plot(muOver[:,1], 'b:', label='$w_2$')
-fill_between(t, \
-             muOver[:,0]+sigOver[:,0], \
-             muOver[:,0]-sigOver[:,0], \
-             facecolor='red', alpha=0.5)
-fill_between(t,\
-             muOver[:,1]+sigOver[:,1], \
-             muOver[:,1]-sigOver[:,1], \
-             facecolor='blue', alpha=0.5)
-xlabel("t [Iterations]", fontdict={'fontsize':fs})
-yl = ylabel("$w_{i,t}$",fontdict={'fontsize':fs})
-yl.set_rotation('horizontal')
-title("a = 10sup a")
-# title('$a = \frac{N}{\sum x_i^2}$ + 1')
+figure(figsize=(10,3*len(alphaData)))
+outs = []
+for i, d in enumerate(alphaData):
+    k, v = d
+    subplot(len(alphaData),1, i+1)
+    outs.append(plotDynamicsForAlpha(v, k, T=100 ))
 
-subplot(2,1,2)
-plot(muUnder[:,0], 'r:', label='$w_1$')
-plot(muUnder[:,1], 'b:', label='$w_2$')
-fill_between(t, \
-             muUnder[:,0]+sigUnder[:,0],\
-             muUnder[:,0]-sigUnder[:,0],\
-             facecolor='red', alpha=0.5)
-fill_between(t, \
-             muUnder[:,1]+sigUnder[:,1],\
-             muUnder[:,1]-sigUnder[:,1],\
-             facecolor='blue', alpha=0.5)
-
-xlabel("t [Iterations]", fontdict={'fontsize':fs})
-yl = ylabel("$w_{i,t}$", fontdict={'fontsize':fs})
-yl.set_rotation('horizontal')
-plt.title('a = sup a')
-# title("$a = 0.06\times\frac{N}{\sum x_i^2}$")
 tight_layout()
-suptitle(("Learning Dynamics in "
-          "Linear Regression Models \n"
-          "For Asymptotically Significant Alpha Values"), y=1.08, fontdict={'fontsize':20});
+suptitle("Dynamical Learning Trajectories for Significant Alpha Values", y=1.08, fontdict={'fontsize':20});
+
+```
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_1.png)
+
+
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_2.png)
+
+
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_3.png)
+
+
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_4.png)
+
+
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_5.png)
+
+
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_6.png)
+
+
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_7.png)
+
+
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_8.png)
+                    
+
+
+```python
 
 ###################################################
 figure(figsize=(10,6))
@@ -301,16 +381,12 @@ tight_layout()
 ```
 
 
-![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_8_0.png)
-
-
-
-![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_8_1.png)
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_10_0.png)
 
 
 
 ```python
-b = -N/linalg.norm(x[0,:])**2  
+a = -N/linalg.norm(x[0,:])**2  
 ```
 
 
@@ -322,8 +398,8 @@ title("Closed From Expression", fontdict={'fontsize':10})
 T = 10000
 w0 = random.normal(2, size=2)
 ws = np.zeros((T,2))
-beta2 = (1/N)*b*x[0,:].dot(x[0,:])+1
-beta1 = -(1/N)*b*x[0,:].dot(y)
+beta2 = (1/N)*a*x[0,:].dot(x[0,:])+1
+beta1 = -(1/N)*a*x[0,:].dot(y)
 for t in xrange(1,T+1):
     ws[t-1,0] = w0[0]*beta2**t + beta1*(1-beta2**(t-1))/(1-beta2)
 plot(ws[:,0])
@@ -334,7 +410,7 @@ wh = w0
 whs = zeros((T, 2))
 whs[0,:] = wh
 for i in xrange(1,T): 
-    wh+=delta(grad(y,yh(x,wh), x), b)
+    wh+=delta(grad(y,yh(x,wh), x), a)
     whs[i,:] = wh.copy()
 plot(whs[:,0])
 suptitle(("Asymptotic Behavior "
@@ -344,12 +420,56 @@ suptitle(("Asymptotic Behavior "
 
 
 
-    <matplotlib.text.Text at 0x12cd85fd0>
+    <matplotlib.text.Text at 0x11a6cf350>
 
 
 
 
-![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_10_1.png)
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_12_1.png)
+
+
+## $\alpha = \sup A$
+
+
+```python
+t = arange(0,10)
+ws = (0**t)*(w0[0]+x[0,:].dot(y)/linalg.norm(x[0,:])**2) + x[0,:].dot(y)/linalg.norm(x[0,:])**2
+figure()
+ax = subplot(111)
+ax.set_title("alpha = sup A")
+ax.plot(ws)
+```
+
+
+
+
+    [<matplotlib.lines.Line2D at 0x1158e3b50>]
+
+
+
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_14_1.png)
+
+
+
+```python
+t = arange(0,10)
+ws = ((-1)**t)*w0[0] - (x[0,:].dot(y)/linalg.norm(x[0,:])**2) + (-2)**t*x[0,:].dot(y)/linalg.norm(x[0,:])**2
+figure()
+ax = subplot(111)
+ax.set_title("alpha = sup A")
+ax.plot(ws)
+```
+
+
+
+
+    [<matplotlib.lines.Line2D at 0x119789fd0>]
+
+
+
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_15_1.png)
 
 
 

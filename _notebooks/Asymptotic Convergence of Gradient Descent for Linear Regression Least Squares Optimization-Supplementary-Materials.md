@@ -30,7 +30,8 @@ grad = lambda ys, yhs, xs: \
 delta = lambda gs, a: \
     a*gs
     
-def regress(y, x, alpha, T=1000):
+def regress(y, x, alpha, T=1000, wh=None, **kwargs):
+
     wh = random.normal(2, size=2)
     whs = zeros((T, 2))
     whs[0,:] = wh
@@ -42,7 +43,7 @@ def regress(y, x, alpha, T=1000):
 
 
 ```python
-def regrSample(y, x, alpha, T=1000, N=10):
+def regrSample(y, x, alpha, T=1000, N=10, **kwargs):
     out = map(
         lambda a: \
         regress(y,x, alpha, T=T), xrange(N)
@@ -59,16 +60,46 @@ def statsRegr(*args, **kwargs):
 
 ## Running Regression above and Below the Upper Bound on $\alpha$
 
-The theoretically derived bounds on $\alpha$ are $$\alpha \in  \left[ -2\frac{N}{|\mathbf{x}|^2}, -1\right] \cap \left[-\frac{N}{|\mathbf{x}|^2}, 0 \right]$$
+The theoretically derived bounds on $\alpha$ are $$\alpha \in  \left( -2\frac{N}{|\mathbf{x}|^2}, 0 \right]$$
 
 Other $\alpha$ values diverge
 
 
 ```python
-alphaOver = -10*N/linalg.norm(x[0,:])**2  
-alphaUnder = -N/linalg.norm(x[0,:])**2  
-muOver, sigOver = statsRegr(y, x, alphaOver, T=T, N=10)
-muUnder, sigUnder = statsRegr(y, x, alphaUnder, T=T, N=10)
+def plotDynamicsForAlpha(alpha, axTitle, T=1000, N=10):
+    t = np.arange(T)
+    mu, sig = statsRegr(y, x, alpha, T=T, N=N)
+    plot(mu[:,0], 'r:', label='$w_1$')
+    plot(mu[:,1], 'b:', label='$w_2$')
+    fill_between(t, \
+                 mu[:,0]+sig[:,0], \
+                 mu[:,0]-sig[:,0], \
+                 facecolor='red', alpha=0.5)
+    fill_between(t,\
+                 mu[:,1]+sig[:,1], \
+                 mu[:,1]-sig[:,1], \
+                 facecolor='blue', alpha=0.5)
+    xlabel("t [Iterations]", fontdict={'fontsize':fs*.8})
+    yl = ylabel("$w_{i,t}$",fontdict={'fontsize':fs*.8})
+    yl.set_rotation('horizontal')
+    title(axTitle, fontdict={'fontsize':fs})
+    return mu, sig
+
+
+```
+
+
+```python
+alphaData = [
+    ("a=2", 2),
+    ("a=0",0.),
+    ("a=-0.5N/x^2",-0.5*N/linalg.norm(x[0,:])**2),
+    ("a=-N/x^2", -N/linalg.norm(x[0,:])**2),
+    ("a=-1.3N/x^2", -1.3*N/linalg.norm(x[0,:])**2),
+    ("a=-1.6N/x^2", -1.6*N/linalg.norm(x[0,:])**2),
+    ("a=-1.99N/x^2", -1.99*N/linalg.norm(x[0,:])**2),
+    ("a=-2N/x^2", -2*N/linalg.norm(x[0,:])**2)
+]
 ```
 
 
@@ -77,46 +108,57 @@ muUnder, sigUnder = statsRegr(y, x, alphaUnder, T=T, N=10)
 from scipy.stats import norm
 import seaborn as sns
 fs = 15
-t = np.arange(T)
-figure(figsize=(10,6))
-subplot(2,1,1)
-plot(muOver[:,0], 'r:', label='$w_1$')
-plot(muOver[:,1], 'b:', label='$w_2$')
-fill_between(t, \
-             muOver[:,0]+sigOver[:,0], \
-             muOver[:,0]-sigOver[:,0], \
-             facecolor='red', alpha=0.5)
-fill_between(t,\
-             muOver[:,1]+sigOver[:,1], \
-             muOver[:,1]-sigOver[:,1], \
-             facecolor='blue', alpha=0.5)
-xlabel("t [Iterations]", fontdict={'fontsize':fs})
-yl = ylabel("$w_{i,t}$",fontdict={'fontsize':fs})
-yl.set_rotation('horizontal')
-title("a = 10sup a")
-# title('$a = \frac{N}{\sum x_i^2}$ + 1')
+figure(figsize=(10,3*len(alphaData)))
+outs = []
+for i, d in enumerate(alphaData):
+    k, v = d
+#     subplot(len(alphaData),1, i+1)
+    figure(figsize=(10,3))
+    outs.append(plotDynamicsForAlpha(v, k, T=100 ))
 
-subplot(2,1,2)
-plot(muUnder[:,0], 'r:', label='$w_1$')
-plot(muUnder[:,1], 'b:', label='$w_2$')
-fill_between(t, \
-             muUnder[:,0]+sigUnder[:,0],\
-             muUnder[:,0]-sigUnder[:,0],\
-             facecolor='red', alpha=0.5)
-fill_between(t, \
-             muUnder[:,1]+sigUnder[:,1],\
-             muUnder[:,1]-sigUnder[:,1],\
-             facecolor='blue', alpha=0.5)
-
-xlabel("t [Iterations]", fontdict={'fontsize':fs})
-yl = ylabel("$w_{i,t}$", fontdict={'fontsize':fs})
-yl.set_rotation('horizontal')
-plt.title('a = sup a')
-# title("$a = 0.06\times\frac{N}{\sum x_i^2}$")
 tight_layout()
-suptitle(("Learning Dynamics in "
-          "Linear Regression Models \n"
-          "For Asymptotically Significant Alpha Values"), y=1.08, fontdict={'fontsize':20});
+suptitle("Dynamical Learning Trajectories for Significant Alpha Values", y=1.08, fontdict={'fontsize':20});
+
+```
+
+
+    <matplotlib.figure.Figure at 0x1157ca6d0>
+
+
+
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_1.png)
+
+
+
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_2.png)
+
+
+
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_3.png)
+
+
+
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_4.png)
+
+
+
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_5.png)
+
+
+
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_6.png)
+
+
+
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_7.png)
+
+
+
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_8.png)
+
+
+
+```python
 
 ###################################################
 figure(figsize=(10,6))
@@ -161,16 +203,12 @@ tight_layout()
 ```
 
 
-![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_8_0.png)
-
-
-
-![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_8_1.png)
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_10_0.png)
 
 
 
 ```python
-b = -N/linalg.norm(x[0,:])**2  
+a = -N/linalg.norm(x[0,:])**2  
 ```
 
 
@@ -182,8 +220,8 @@ title("Closed From Expression", fontdict={'fontsize':10})
 T = 10000
 w0 = random.normal(2, size=2)
 ws = np.zeros((T,2))
-beta2 = (1/N)*b*x[0,:].dot(x[0,:])+1
-beta1 = -(1/N)*b*x[0,:].dot(y)
+beta2 = (1/N)*a*x[0,:].dot(x[0,:])+1
+beta1 = -(1/N)*a*x[0,:].dot(y)
 for t in xrange(1,T+1):
     ws[t-1,0] = w0[0]*beta2**t + beta1*(1-beta2**(t-1))/(1-beta2)
 plot(ws[:,0])
@@ -194,7 +232,7 @@ wh = w0
 whs = zeros((T, 2))
 whs[0,:] = wh
 for i in xrange(1,T): 
-    wh+=delta(grad(y,yh(x,wh), x), b)
+    wh+=delta(grad(y,yh(x,wh), x), a)
     whs[i,:] = wh.copy()
 plot(whs[:,0])
 suptitle(("Asymptotic Behavior "
@@ -204,12 +242,56 @@ suptitle(("Asymptotic Behavior "
 
 
 
-    <matplotlib.text.Text at 0x12cd85fd0>
+    <matplotlib.text.Text at 0x11a6cf350>
 
 
 
 
-![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_10_1.png)
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_12_1.png)
+
+
+## $\alpha = \sup A$
+
+
+```python
+t = arange(0,10)
+ws = (0**t)*(w0[0]+x[0,:].dot(y)/linalg.norm(x[0,:])**2) + x[0,:].dot(y)/linalg.norm(x[0,:])**2
+figure()
+ax = subplot(111)
+ax.set_title("alpha = sup A")
+ax.plot(ws)
+```
+
+
+
+
+    [<matplotlib.lines.Line2D at 0x1158e3b50>]
+
+
+
+
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_14_1.png)
+
+
+
+```python
+t = arange(0,10)
+ws = ((-1)**t)*w0[0] - (x[0,:].dot(y)/linalg.norm(x[0,:])**2) + (-2)**t*x[0,:].dot(y)/linalg.norm(x[0,:])**2
+figure()
+ax = subplot(111)
+ax.set_title("alpha = sup A")
+ax.plot(ws)
+```
+
+
+
+
+    [<matplotlib.lines.Line2D at 0x119789fd0>]
+
+
+
+
+![png](Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_15_1.png)
 
 
 
