@@ -82,11 +82,13 @@ If
 $$
 0 \le \alpha\frac{\|\mathbf{x}\|^2}{N} + 1 < 1
 $$
+
 then 
 
 $$
 -1 \le \alpha\frac{\|\mathbf{x}\|^2}{N} < 0
 $$
+
 Thus 
 
 $$
