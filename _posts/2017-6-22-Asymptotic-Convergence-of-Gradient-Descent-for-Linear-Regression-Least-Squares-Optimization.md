@@ -131,6 +131,8 @@ It is now clear to see if $\alpha \not\in A$ then (24) diverges.
 
 We have tested these results in python simulations and have found that indeed with $\alpha$ values above the upper bound $\alpha \le -\frac{N}{\mathbf{x}_i\cdot\mathbf{x_i}}$ , the system converges, and the opposite for  $\alpha  > -\frac{N}{\| \mathbf{x}_i\|^2}$. 
 
+![Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_12_1]({{site.url}}/images/Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_files/Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_12_1.png)
+
 ## The Dynamics of the Learning Process
 
 Having obtained a nice analytical expression for valid $\alpha$ values, we would like to understand the  actual learning dynamics.How is asymptotic convergence affected by the choice of $\alpha$? What is the value of the limit in equation (14)? 
@@ -145,13 +147,27 @@ There are a few interesting initial observations to make.
 
 It is worthwhile as an exercise to study the dynamics of the learning system under the extremal values of $\alpha$. 
 
+### $\alpha> 0$, *unstable*
 
-(**1**) $\alpha = 0$, *stable*. In this case, the weights should diverge linearly. However, because $\beta_{i,1}$ depends on $\alpha$ and $\beta_{i1}$ is also the constant multiple in the geometric series, the sum itself vanishes and the trajectory is stationary. 
+From the definition of $A$, if $\alpha > 0$ the system diverges exponentially. 
+
+![Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_9_1]({{site.url}}/images/Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_files/Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_9_1.png)
+
+###  $\alpha = 0$, *stable*
+
+In this case, the weights should diverge linearly. However, because $\beta_{i,1}$ depends on $\alpha$ and $\beta_{i1}$ is also the constant multiple in the geometric series, the sum itself vanishes and the trajectory is stationary. 
 
 ![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_2.png)
 
-(**2**) $\alpha = -\frac{N}{\|\mathbf{x}_i\|^2}$, *stable*. Plugging this into (24) yields an expression 
+### $-\frac{N}{\|\mathbf{x}_i\|} < \alpha < 0$, *stable*
 
+![Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_9_3]({{site.url}}/images/Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_files/Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_9_3.png)
+
+
+
+### $\alpha = -\frac{N}{\|\mathbf{x}_i\|^2}$, *stable*. 
+
+Plugging this into (24) yields an expression 
 $$
 w_t = 0^t\left(w_0 + \frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}\right)+\frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}
 $$
@@ -159,19 +175,28 @@ This is actually interesting because the system converges in one iteration. The 
 
 ![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_4.png)
 
-(**3**) $\alpha = -2\frac{N}{\|\mathbf{x}_i\|^2}$, *unstable*.By plugging in this value of $\alpha$, we get a divergent oscillator. This is effectively a damped oscillator if viewed backwards in time.
 
+
+### $\lim\limits_{k \to -2^+} \alpha = -k\frac{N}{\|\mathbf{x}_i\|}$, **stable**
+
+
+
+Recall from the definiton of $A$ that its left bound is open. As such, the dynamics of learning are convergent for values of $\alpha$ infinitesimally close to $2$. 
+
+![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_7.png) 
+
+### $\alpha = -2\frac{N}{\|\mathbf{x}_i\|^2}$, *unstable*
+
+By plugging in this value of $\alpha$, we get an non-converging oscillator. 
 $$
-w_t =(-1)^t w_0 + \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}\left((-2)^t -1\right)
+w_t =(-1)^t w_0 + \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}\left((-1)^t -1\right)
 $$
 
 By neglecting the terms with constant magnitude, we can rewrite (26) to emphasize its nature as a divergent oscillator. If we look back  at our work, (26) oscillates only because gradient descent looks for the direction of descent, which is the negative of the error gradient with respect to weights. 
 
-$$
-w_t =  \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}e^{t \ln 2}e^{ i\pi t}
-$$
 
-![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_7.png) 
+
+
 ![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_8.png) 
 
 
@@ -335,7 +360,7 @@ suptitle("Dynamical Learning Trajectories for Significant Alpha Values", y=1.08,
 
 
 ![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_8.png)
-                    
+​                    
 
 
 ```python
