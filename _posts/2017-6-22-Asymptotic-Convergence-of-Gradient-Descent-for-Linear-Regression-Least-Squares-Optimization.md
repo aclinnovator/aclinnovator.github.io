@@ -1,5 +1,5 @@
 ---
-title: A Bifurcation Point in the Learning Dynamics of Gradient Descent in Linear Least Squares Regression 
+title: The Dynamics of Gradient Descent in Linear Least Squares Regression 
 author: Akiva Lipshitz
 date: June 22, 2017
 layout: post
