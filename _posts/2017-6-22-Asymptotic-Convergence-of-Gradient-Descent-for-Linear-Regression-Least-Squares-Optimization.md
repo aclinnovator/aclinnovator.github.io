@@ -191,20 +191,31 @@ Recall from the definiton of $A$ that its left bound is open. As such, the dynam
 
 By plugging in this value of $\alpha$, we get an oscillator. 
 
+
 $$
 w_t =(-1)^t w_0 + \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}\left((-1)^t -1\right)
 $$
 
+
+
 ### $\alpha > -2\frac{N}{\|\mathbf{x}_i\|^2}$, *unstable*
 
 This time, we get a divergent oscillator
+
+
 $$
 w_t =(-1)^t w_0 + \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}\left((-1)^t(1+ \epsilon)^t-1\right)
 $$
+
+
 By neglecting the terms with constant magnitude, we can rewrite (26) to emphasize its nature as a divergent oscillator.
+
+
 $$
 w_t \propto \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}e^{i \pi t}e^{\ln{[1+\epsilon]}t}
 $$
+
+
  If we look back  at our work, (26) oscillates only because gradient descent looks for the direction of descent, which is the negative of the error gradient with respect to weights. 
 
 ![png]({{site.url}}/images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_8.png) 
