@@ -41,7 +41,7 @@ theme_settings:
   youtube:
 
   # Scripts
-  google_analytics: # Tracking ID, e.g. "UA-000000-01"
+  google_analytics: "UA-101714604-1" # Tracking ID, e.g. "UA-000000-01"
   disqus_shortname:
   muut_community_name: # From muut.com settings, e.g. "muttcommunityname"
   katex: false # Enable if using math markup
@@ -71,4 +71,4 @@ highlighter: rouge
 sass:
   sass_dir: _sass
   style: :compressed
-gems: [jekyll-paginate]
+gems: [jekyll-paginate, jekyll-seo-tag]
