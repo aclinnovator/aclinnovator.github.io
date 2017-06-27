@@ -235,3 +235,5 @@ This article is only a basic preview of what is to come. The presentation here i
 
 Although linear regression has a closed form solution, that such analytical results on the dynamics of gradient descent is exciting. It shows that understanding the learning behavior of gradient descent dynamical systems is actually quite a tractable problem. This ought to inspire efforts to understand the learning process of more complex optimization tasks. This is practically useful as with deeper understanding comes more powerful algorithms. In the longer run, it will be extremely valuable to the effort to decipher the fundamental algorithms underlying intelligent, learning, systems. 
 
+## Supplementary Materials
+The code used to generate the figures can be found [here](https://github.com/theideasmith/theideasmith.github.io/blob/master/_notebooks/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization.ipynb)
