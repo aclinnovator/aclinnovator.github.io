@@ -131,7 +131,7 @@ $$
 
 It is now clear to see if $\alpha \not\in A$ then (24) diverges. 
 
-We have tested these results in python simulations and have found that indeed with $\alpha$ values above the upper bound $\alpha \le -\frac{N}{\mathbf{x}_i\cdot\mathbf{x_i}}$ , the system converges, and the opposite for  $\alpha  > -\frac{N}{\| \mathbf{x}_i\|^2}$. 
+We have tested these results in python simulations and have found that indeed with $\alpha$ values above the upper bound $\alpha \le -\frac{N}{\mathbf{x}_i\cdot\mathbf{x_i}}$ , the system diverges, and the opposite for  $\alpha  > -\frac{N}{\| \mathbf{x}_i\|^2}$. 
 
 ![Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_12_1]({{site.url}}/images/Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_files/Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_12_1.png)
 
