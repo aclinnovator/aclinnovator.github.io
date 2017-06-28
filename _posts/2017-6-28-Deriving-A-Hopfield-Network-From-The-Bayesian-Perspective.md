@@ -77,7 +77,7 @@ $$
 \tilde{x}_t:= \kappa \sum\limits^N_{\mu=1} \exp\{H_\mu\}
 $$
 
-where $\kappa$ is the arbitrarily chosen rate of convergence. 
+where $\kappa$ is the arbitrarily chosen rate of convergence. Eventually this system will converge on the denoised signal. 
 
 In the next post, we will study this dynamical system. 
 
