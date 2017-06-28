@@ -5,7 +5,7 @@ date: June 28, 2017
 layout: post
 ---
 
-Of the many mathematical entities I never understood nor could I foresee the day when I could understand them is Hopfield Networks. Hopfield Networks are models of contentaddressable memory. In other words, they are dynamical systems designed to encode $N$ arbitrary strings and then converge to a point of perfect recall of any one of these strings if stimulated with a noisy rendition. This article derives the Hopfield Network from scratch and studies its dynamical properties. Hopfield networks are useful to study for educational experience. Not so much is understanding the particular implementation level details of hopfield networks as important as appreciating the perspectives and analytical decisions made in the process. 
+Of the many mathematical entities I never understood nor could I foresee the day when I would understand them is Hopfield Networks. Hopfield Networks are models of contenta ddressable memory. In other words, they are dynamical systems designed to encode $N$ arbitrary strings and then converge to a point of perfect recall of any one of these strings if stimulated with a noisy rendition. This article derives the Hopfield Network from scratch and studies its dynamical properties. Hopfield networks are useful to study for educational experience. Not so much is understanding the particular implementation level details of hopfield networks as important as appreciating the perspectives and analytical decisions made in the process. 
 
 ## Deriving a Dynamical System
 
@@ -140,6 +140,7 @@ This is only the case if $0< \alpha \ll 1$. Given that $\alpha = \frac{p}{1-p}$,
 ## Conclusion
 
 We have shown that a Hopfield-like system emerges quite naturally when you ask the same question that Hopfield did and take a maximum likelihood approach to answering it. 
+where $\kappa$ is the arbitrarily chosen rate of convergence. Eventually this system will converge on the denoised signal. 
 
 *I usually post my blog articles before they are finished as an incentive for me to finish them. come back later and I'll do more in depth analysis of the stability and nuance in the Hopfield network we just derived*
 
