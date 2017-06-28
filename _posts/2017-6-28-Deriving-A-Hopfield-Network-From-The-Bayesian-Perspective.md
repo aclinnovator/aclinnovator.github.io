@@ -17,7 +17,7 @@ $$
 
 It follows that $X_t = x_t$ with probability $p$ and $X_t= 1-x_t = \neg x_t$ with probability $1-p$. We will write observations of $X$ as $\tilde{\mathbf{x}}$. 
 
-This statistical backend immediately leads to a quantification of the: what is the true signal that is most likely to have been sampled and then permuted into the observed signal? That is, the goal is to solve 
+This statistical backend immediately leads to a quantification of the question: what is the true signal that is most likely to have been sampled and then permuted into the observed signal? That is, the goal is to solve 
 
 $$
 \arg\max\limits_{\mathbf{x}}\mathcal{P}\left(\mathbf{X}=(1-\mathbf{x})\mathcal{E}\right)
