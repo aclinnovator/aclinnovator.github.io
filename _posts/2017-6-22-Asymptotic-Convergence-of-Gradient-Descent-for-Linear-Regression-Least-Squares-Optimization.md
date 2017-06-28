@@ -131,7 +131,7 @@ $$
 
 It is now clear to see if $\alpha \not\in A$ then (24) diverges. 
 
-We have tested these results in python simulations and have found that indeed with $\alpha$ values above the upper bound $\alpha \le -\frac{N}{\mathbf{x}_i\cdot\mathbf{x_i}}$ , the system converges, and the opposite for  $\alpha  > -\frac{N}{\| \mathbf{x}_i\|^2}$. 
+We have tested these results in python simulations and have found that indeed with $\alpha$ values above the upper bound $\alpha \le -\frac{N}{\mathbf{x}_i\cdot\mathbf{x_i}}$ , the system diverges, and the opposite for  $\alpha  > -\frac{N}{\| \mathbf{x}_i\|^2}$. 
 
 ![Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_12_1]({{site.url}}/images/Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_files/Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_12_1.png)
 
@@ -252,4 +252,4 @@ This article is only a basic preview of what is to come. The presentation here i
 Although linear regression has a closed form solution, that such analytical results on the dynamics of gradient descent is exciting. It shows that understanding the learning behavior of gradient descent dynamical systems is actually quite a tractable problem. This ought to inspire efforts to understand the learning process of more complex optimization tasks. This is practically useful as with deeper understanding comes more powerful algorithms. In the longer run, it will be extremely valuable to the effort to decipher the fundamental algorithms underlying intelligent, learning, systems. 
 
 ## Supplementary Materials
-The code used to generate the figures can be found [here](https://github.com/theideasmith/theideasmith.github.io/blob/master/_notebooks/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization.ipynb)
+The code used to generate the figures can be found [here](https://github.com/theideasmith/theideasmith.github.io/blob/master/_notebooks/AsymptoticConvergence/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization.ipynb)
