@@ -20,7 +20,7 @@ $$
 such that 
 
 $$
-X_j = x_j\zeta
+X_j = x_j\zeta_j
 $$
 
 It follows that it is in fact the case $X_j = x_j$ with probability $1-p$ and $X_j=-x_j$ with probability $p$. 
