@@ -1,7 +1,7 @@
 ---
 title: Deriving a Hopfield Network from The Bayesian Perspective
 author: Akiva Lipshitz
-date: June 23, 2017
+date: June 28, 2017
 layout: post
 ---
 
