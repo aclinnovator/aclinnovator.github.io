@@ -141,11 +141,7 @@ Well, we're using $\tanh$ already to keep the outputs bounded, so why not just u
 
 ## Analysis of The Hopfield Dynamical System
 
-<<<<<<< HEAD
-As a sanity check, I can confirm that equation $(14)$ does in fact converge upon the true value by working backwards. Assume $z_j \approx x^w_j =1 $. Then 
-=======
 As a sanity check, we can confirm that equation $(18)$ does in fact converge upon the true value by working backwards. Assume $z_j \approx x^w_j =1 $. Then 
->>>>>>> aa1d6ae6d93bcb98604bc7e3a3e86de142c292b7
 
 $$
  \sum\limits^N_{\mu=1}x_j^\mu \alpha^{H_\mu} \approx x^w_j
