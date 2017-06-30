@@ -69,33 +69,29 @@ mathematics is that of gradient descent, which is a technique for
 solving programs of the form
 
 \[
-\arg\max _x f(x)
+\arg\max _w f(w)
 \]
 
 by solving a dynamical system
 
 \[
-\mathbf{w}_{t+1} := \mathbf{w}+\lambda(\mathbf{w}\mid \mathbf{x}, \mathbf{y})
+\mathbf{w}_{t+1} := \mathbf{w}+\alpha\lambda(\mathbf{w}\mid \mathbf{x}, \mathbf{y})
 \]
 
-Despite its widespread use, the general public may be unaware of the
-more nuanced details of its implementation. It is important that they
-understand its quirks both for their own successful use of the algorithm
-as well as to ensure their successful automous use and development of
-new and more learning algorithms. In particular, we show in the case of
-a simple least-squares linear regression optimization that equation (2)
-diverges if the learning rate exceeds some given upper bound. We also
-derive an explicit formula for this upper bound. That such results may
-be theoretically derived is an innovation in the toolkit used by those
-who develop and study learning algorithms. It shows that after learning
-rules have been derived, additional analysis must be performed to
+where \(\mathbf{w}\) represents parameters and \(\alpha\) is a learning rate.
+
+In this paper, we show that in gradient descent optimization for regression tasks the dynamical mode (logistic, exponential, or oscillatory, etc.) of the system defined by equation (2)
+depends on which subset of the real line the learning rate of the system \(\alpha\) is an element of.
+The boundaries of these subsets are significant as they represent bifurcation points in the dynamics of gradient descent.
+That such results may be theoretically derived shows that after learning
+rules have been written down, additional analysis must be done to
 understand the asymptotic behavior and stability dynamics of the
-dynamical system defined by the learning rules.
+dynamical system defined by the learning rules so as to appropriately
+choose hyperparameters.
 
-\subsection{\texorpdfstring{Bounds on Learning Rate \(\alpha\) for which
-Learning
-Converges}{Bounds on Learning Rate \alpha for which Learning Converges}}\label{bounds-on-learning-rate-alpha-for-which-learning-converges}
+In a broad sense, this work sheds light on the space of learning processes which will hopefully inspire new developments in the study of the actual learning process of intelligent learning systems.
 
+\subsection{Bounds on Learning Rate \(\alpha\) for which Learning Converges}
 Suppose we have already derived the learning rules for a D dimensional
 regression from the normality assumption. Also, we have removed all
 constants of proportionality in the learning equations for the sake of
@@ -141,8 +137,8 @@ to iterations, with dimension implied.
 w_{0} &= w_0\\
 w_{1} &= \beta_1+w_0(\beta_2+1)  \\
 w_2  &= \beta_1+\beta_1(\beta_2+1)+w_0(\beta_2+1)^2\\
-w_3 &= \beta_1 + \beta_1(\beta_2+1)+\beta_1(\beta_2+1)^2+w_0(\beta_2+1)^3\\ 
-w_n &=w_0(\beta_2 + 1)^n +  \beta_1\sum^{n-1}_{j=0}(\beta_2+1)^j 
+w_3 &= \beta_1 + \beta_1(\beta_2+1)+\beta_1(\beta_2+1)^2+w_0(\beta_2+1)^3\\
+w_n &=w_0(\beta_2 + 1)^n +  \beta_1\sum^{n-1}_{j=0}(\beta_2+1)^j
 \end{align}
 
 This leads to somewhat of a closed form expression:
@@ -282,7 +278,6 @@ Regression Least Squares Optimization\_9\_1}
 \end{figure}
 
 \subsubsection{\(\alpha = 0\),\emph{stable}}
-
 In this case, the weights should diverge linearly. However, because
 \(\beta_{i,1}\) depends on \(\alpha\) and \(\beta_{i1}\) is also the
 constant multiple in the geometric series, the sum itself vanishes and
@@ -294,7 +289,7 @@ the trajectory is stationary.
 \caption{png}
 \end{figure}
 
-\subsubsection{\(-\frac{N}{\|\mathbf{x}_i\|} < \alpha < 0\),\emph{stable}}
+\subsubsection{\(-\frac{N}{\|\mathbf{x}_i\|} < \alpha < 0\), \emph{stable}}
 
 \begin{figure}[htbp]
 \centering
@@ -304,7 +299,6 @@ Regression Least Squares Optimization\_9\_3}
 \end{figure}
 
 \subsubsection{\(\alpha = -\frac{N}{\|\mathbf{x}_i\|^2}\),\emph{stable}}
-
 Plugging this into (24) yields an expression \[
 w_t = 0^t\left(w_0 + \frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}\right)+\frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}
 \] This is actually interesting because the system converges in one
@@ -319,7 +313,6 @@ form solution is
 \end{figure}
 
 \subsubsection{\(\lim\limits_{k \to -2^+} \alpha = -k\frac{N}{\|\mathbf{x}_i\|}\),\textbf{stable}}
-
 Recall from the definiton of \(A\) that its left bound is open. As such,
 the dynamics of learning are convergent for values of \(\alpha\)
 infinitesimally close to \(2\).
@@ -330,9 +323,9 @@ infinitesimally close to \(2\).
 \caption{png}
 \end{figure}
 
-\subsubsection{\(\alpha = -2\frac{N}{\|\mathbf{x}_i\|^2}\),\emph{unstable}}{}
-
-By plugging in this value of \(\alpha\), we get an non-converging oscillator. \[
+\subsubsection{\(\alpha = -2\frac{N}{\|\mathbf{x}_i\|^2}\), \emph{unstable}}
+By plugging in this value of \(\alpha\), we get an non-converging
+oscillator. \[
 w_t =(-1)^t w_0 + \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}\left((-1)^t -1\right)
 \]
 

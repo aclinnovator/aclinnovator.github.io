@@ -1,0 +1,105 @@
+<p>Arguably, one of the most powerful developments in early modern applied mathematics is that of gradient descent, which is a technique for solving programs of the form</p>
+<p><br /><span class="math display">argmax<sub><em>w</em></sub><em>f</em>(<em>w</em>)</span><br /></p>
+<p>by solving a dynamical system</p>
+<p><br /><span class="math display"><strong>w</strong><sub><em>t</em> + 1</sub> := <strong>w</strong> + <em>α</em><em>λ</em>(<strong>w</strong> ∣ <strong>x</strong>, <strong>y</strong>)</span><br /></p>
+<p>where <span class="math inline"><strong>w</strong></span> represents parameters and <span class="math inline"><em>α</em></span> is a learning rate.</p>
+<p>In this paper, we show that in gradient descent optimization for regression tasks the dynamical mode (logistic, exponential, or oscillatory, etc.) of the system defined by equation (2) depends on which subset of the real line the learning rate of the system <span class="math inline"><em>α</em></span> is an element of. The boundaries of these subsets are significant as they represent bifurcation points in the dynamics of gradient descent. That such results may be theoretically derived shows that after learning rules have been written down, additional analysis must be done to understand the asymptotic behavior and stability dynamics of the dynamical system defined by the learning rules so as to appropriately choose hyperparameters.</p>
+<p>In a broad sense, this work sheds light on the space of learning processes which will hopefully inspire new developments in the study of the actual learning process of intelligent learning systems.</p>
+<h2 id="bounds-on-learning-rate-alpha-for-which-learning-converges">Bounds on Learning Rate <span class="math inline"><em>α</em></span> for which Learning Converges</h2>
+<p>Suppose we have already derived the learning rules for a D dimensional regression from the normality assumption. Also, we have removed all constants of proportionality in the learning equations for the sake of simplicity, which doesn’t change the asymptotic behavior of learning.</p>
+<p>Let <span class="math inline"><em>α</em></span> be a learning rate, <span class="math inline"><strong>x</strong></span> be a <span class="math inline"><em>T</em></span> by <span class="math inline"><em>D</em></span> matrix, <span class="math inline"><strong>y</strong></span> a T by 1 matrix, and <span class="math inline"><strong>w</strong></span> a D dimensional row vector.</p>
+<p><br /><span class="math display">$$\begin{aligned}
+\Delta w_{i,t} &amp;= -\alpha \sum\limits^N_j (y_i-\hat{y}_j)x_j \\
+&amp;= -\alpha \sum\limits^N_j (y_i-w_jx_{ij})x_{ij}\\
+&amp;= -\alpha \mathbf{x}_i\cdot\mathbf{y}\frac{1}{N} + w_{i,t}\alpha \mathbf{x}_i\cdot\mathbf{x}_i\frac{1}{N}\end{aligned}$$</span><br /></p>
+<p>Observe in this linear task the dynamics of each weight <span class="math inline"><em>w</em><sub><em>i</em></sub></span> is independent of that of any other weight. We can simplify equation (2) by writing <span class="math inline">$\beta_ {i1}= - \alpha\mathbf{x_i}\cdot\mathbf{y}\frac{1}{N}$</span> and <span class="math inline">$\beta_{i2}=\alpha\mathbf{x}_i \cdot\mathbf{x}_i\frac{1}{N}$</span>, such that</p>
+<p><br /><span class="math display"><em>Δ</em><em>w</em><sub><em>i</em>, <em>t</em></sub> = <em>β</em><sub><em>i</em>1</sub> + <em>β</em><sub><em>i</em>2</sub><em>w</em><sub><em>i</em><em>t</em></sub></span><br /></p>
+<p>We would like to analyze the asymptotic behavior of this dynamical system and to do so we need an analytical expression for <span class="math inline"><em>w</em><sub><em>i</em>, <em>t</em></sub></span>. First, we will produce an update rule</p>
+<p><br /><span class="math display"><em>w</em><sub><em>i</em>, <em>t</em> + 1</sub> = <em>β</em><sub><em>i</em>1</sub> + <em>w</em><sub><em>i</em><em>t</em></sub>(<em>β</em><sub><em>i</em>2</sub> + 1)</span><br /></p>
+<p>which we recognize as a one dimensional autoregressive process with an affine term. We can recursively compose equation (5) with itself, using <span class="math inline"><em>w</em><sub><em>i</em>, 0</sub> ∼ 𝒩(<em>μ</em>, <em>σ</em>)</span> as initial conditions. This is a bit of a tedious computation that results in a closed form polynomial expression. We simplify the indices in the computation by assuming it holds for all <span class="math inline"><em>w</em><sub><em>i</em></sub></span>. Thus subscripts in the computation on <span class="math inline"><em>w</em></span> refer to iterations, with dimension implied.</p>
+<p><br /><span class="math display">$$\begin{aligned}
+w_{0} &amp;= w_0\\
+w_{1} &amp;= \beta_1+w_0(\beta_2+1)  \\
+w_2  &amp;= \beta_1+\beta_1(\beta_2+1)+w_0(\beta_2+1)^2\\
+w_3 &amp;= \beta_1 + \beta_1(\beta_2+1)+\beta_1(\beta_2+1)^2+w_0(\beta_2+1)^3\\
+w_n &amp;=w_0(\beta_2 + 1)^n +  \beta_1\sum^{n-1}_{j=0}(\beta_2+1)^j\end{aligned}$$</span><br /></p>
+<p>This leads to somewhat of a closed form expression:</p>
+<p><br /><span class="math display">$$w_{it} = (\beta_{i2}+1)^t w_{i0}+\beta_{i1}\sum\limits^{t-1}_{j=1}(\beta_{i2}+1)^j$$</span><br /></p>
+<p>We are interested in the limit <span class="math inline"><em>t</em> → ∞</span> as it relates to <span class="math inline"><em>α</em></span>.</p>
+<p><br /><span class="math display">$$\lim\limits_{t\to\infty} \left [w_{it} = (\beta_{i2}+1)^t w_{i0}+\beta_{i1}\sum\limits^{t-1}_{j=1}(\beta_{i2}+1)^j \right] =\ ?$$</span><br /></p>
+<p>Both terms in (8) converge if <span class="math inline">−1 &lt; <em>β</em><sub><em>i</em>2</sub> + 1 &lt; 1</span>. Recalling from before <span class="math inline">$\beta_{i2} =\alpha\mathbf{x_i}\cdot\mathbf{x_i}\frac{1}{N}$</span>,</p>
+<p><br /><span class="math display">$$\begin{aligned}
+-1 &lt; &amp;\beta_{i2}+1  &lt;1 \\
+-1 &lt; &amp;\alpha\frac{\|\mathbf{x}\|^2}{N} + 1 &lt; 1 \\\end{aligned}$$</span><br /></p>
+<p>There are two cases to consider and we now go through them:</p>
+<p>If</p>
+<p><br /><span class="math display">$$0 \le \alpha\frac{\|\mathbf{x}\|^2}{N} + 1 &lt; 1$$</span><br /></p>
+<p>then</p>
+<p><br /><span class="math display">$$-1 \le \alpha\frac{\|\mathbf{x}\|^2}{N} &lt; 0$$</span><br /></p>
+<p>Thus</p>
+<p><br /><span class="math display">$$-1 \le  \frac{\alpha}{N}|\mathbf{x}|^2 &lt; 0$$</span><br /></p>
+<p>This leads to the bounds</p>
+<p><br /><span class="math display">$$-\frac{N}{\|\mathbf{x}\|^2} \le \alpha&lt; 0$$</span><br /></p>
+<p>The second case to consider is that of <span class="math inline">$-1 &lt; \alpha\frac{\mathbf{x_i}\cdot\mathbf{x_i}}{N} + 1 \le 0$</span>. Here, using a similar thought process</p>
+<p><br /><span class="math display">$$-2\frac{N}{\|\mathbf{x}\|^2} &lt; \alpha \le -\frac{N}{\|\mathbf{x}\|^2}$$</span><br /></p>
+<p>We now take the union of the sets defined by (17) and (18) as valid <span class="math inline"><em>α</em></span> values, naming it <span class="math inline"><em>A</em></span>. <span class="math inline"><em>A</em></span> is expressed in terms of its components because the inner bound is actually significant as it is the <em>optimal</em> <span class="math inline"><em>α</em></span> value that leads to convergence in one step.</p>
+<p><br /><span class="math display">$$A_i = \left( -2\frac{N}{\|\mathbf{x}_i\|^2},  -\frac{N}{\|\mathbf{x}\|^2}\right] \cup \left[-\frac{N}{\|\mathbf{x}_i\|^2}, 0 \right)$$</span><br /></p>
+<h2 id="a-closed-form-expression">A Closed Form Expression</h2>
+<p>Equation (12) could have been recognized as a geometric series and is now rewritten as such:</p>
+<p><br /><span class="math display">$$w_{it} = (\beta_{i2}+1)^t w_0+ \beta_{i1}\frac{1-(\beta_{i2}+1)^{t}}{\beta_{i2}}$$</span><br /></p>
+<p>Substitute <span class="math inline"><em>β</em></span> values and with some algebra we arrive at the promised closed form expression. That such an equation exists is a rarity. As such, the author believes equation (24) ought to be handled with utmost care and placed deep in a Gringots vault for safekeeping, far from the prying eyes of those nasty adversarial networks.</p>
+<p><br /><span class="math display">$$w_{it} = \left[\alpha\frac{\|\mathbf{x}_i\|^2}{N} + 1\right]^t w_0-\left[\frac{\mathbf{x_i}\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2} \right]\left[1-\left(\alpha\frac{\|\mathbf{x}_i\|^2}{N} + 1\right)^t\right]$$</span><br /></p>
+<p>It is now clear to see if <span class="math inline"><em>α</em> ∉ <em>A</em></span> then (24) diverges.</p>
+<p>We have tested these results in python simulations and have found that indeed with <span class="math inline"><em>α</em></span> values above the upper bound <span class="math inline">$\alpha \le -\frac{N}{\mathbf{x}_i\cdot\mathbf{x_i}}$</span> , the system converges, and the opposite for <span class="math inline">$\alpha &gt; -\frac{N}{\| \mathbf{x}_i\|^2}$</span>.</p>
+<div class="figure">
+<img src="../images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_12_1.png" alt="Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_12_1" />
+<p class="caption">Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_12_1</p>
+</div>
+<h2 id="the-dynamics-of-the-learning-process">The Dynamics of the Learning Process</h2>
+<p>Having obtained a nice analytical expression for valid <span class="math inline"><em>α</em></span> values, we would like to understand the actual learning dynamics.How is asymptotic convergence affected by the choice of <span class="math inline"><em>α</em></span>? What is the value of the limit in equation (14)?</p>
+<p>There are a few interesting initial observations to make.</p>
+<p>(<strong>1</strong>) From equation (4), we can easily see that if <br /><span class="math display">$$\hat{y}_j=y_j$$</span><br /> then <span class="math inline"><em>Δ</em><em>w</em><sub><em>i</em>, <em>t</em></sub> = 0</span>. Thus the true solution is a stable point regardless of <span class="math inline"><em>α</em></span>.</p>
+<p>(<strong>2</strong>) Equation (20) is either monotonically increasing or decreasing. In the limit <span class="math inline"><em>t</em> → ±∞</span>, all lower order terms drop out and the rate of convergence is of the order <span class="math inline">𝒪(<em>α</em><sup><em>t</em></sup>)</span>.</p>
+<p>(<strong>3</strong>) We can then write the characteristic timescale of convergence <span class="math inline">$\tau = \frac{1}{\alpha^t}$</span> which is exponentially small. Thus we will observe very fast convergence.</p>
+<p>It is worthwhile as an exercise to study the dynamics of the learning system under the extremal values of <span class="math inline"><em>α</em></span>.</p>
+<h3 id="alpha-0unstable"><span class="math inline"><em>α</em> &gt; 0</span>,<em>unstable</em></h3>
+<p>From the definition of <span class="math inline"><em>A</em></span>, if <span class="math inline"><em>α</em> &gt; 0</span> the system diverges exponentially.</p>
+<div class="figure">
+<img src="../images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_1.png" alt="Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_9_1" />
+<p class="caption">Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_9_1</p>
+</div>
+<h3 id="alpha-0stable"><span class="math inline"><em>α</em> = 0</span>,<em>stable</em></h3>
+<p>In this case, the weights should diverge linearly. However, because <span class="math inline"><em>β</em><sub><em>i</em>, 1</sub></span> depends on <span class="math inline"><em>α</em></span> and <span class="math inline"><em>β</em><sub><em>i</em>1</sub></span> is also the constant multiple in the geometric series, the sum itself vanishes and the trajectory is stationary.</p>
+<div class="figure">
+<img src="../images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_2.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="fracnmathbfx_i-alpha-0-stable"><span class="math inline">$-\frac{N}{\|\mathbf{x}_i\|} &lt; \alpha &lt; 0$</span>, <em>stable</em></h3>
+<div class="figure">
+<img src="../images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_3.png" alt="Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_9_3" />
+<p class="caption">Asymptotic Convergence of Gradient Descent for Linear Regression Least Squares Optimization_9_3</p>
+</div>
+<h3 id="alpha--fracnmathbfx_i2stable"><span class="math inline">$\alpha = -\frac{N}{\|\mathbf{x}_i\|^2}$</span>,<em>stable</em></h3>
+<p>Plugging this into (24) yields an expression <br /><span class="math display">$$w_t = 0^t\left(w_0 + \frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}\right)+\frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}$$</span><br /> This is actually interesting because the system converges in one iteration. The first term vanishes for <span class="math inline"><em>t</em> &gt; 0</span>, such that the closed form solution is <span class="math inline">$\frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}$</span></p>
+<div class="figure">
+<img src="../images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_4.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="limlimits_k-to--2-alpha--kfracnmathbfx_istable"><span class="math inline">$\lim\limits_{k \to -2^+} \alpha = -k\frac{N}{\|\mathbf{x}_i\|}$</span>,<strong>stable</strong></h3>
+<p>Recall from the definiton of <span class="math inline"><em>A</em></span> that its left bound is open. As such, the dynamics of learning are convergent for values of <span class="math inline"><em>α</em></span> infinitesimally close to <span class="math inline">2</span>.</p>
+<div class="figure">
+<img src="../images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_7.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h3 id="alpha--2fracnmathbfx_i2-unstable"><span class="math inline">$\alpha = -2\frac{N}{\|\mathbf{x}_i\|^2}$</span>, <em>unstable</em></h3>
+<p>By plugging in this value of <span class="math inline"><em>α</em></span>, we get an non-converging oscillator. <br /><span class="math display">$$w_t =(-1)^t w_0 + \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}\left((-1)^t -1\right)$$</span><br /></p>
+<p>By neglecting the terms with constant magnitude, we can rewrite (26) to emphasize its nature as a divergent oscillator. If we look back at our work, (26) oscillates only because gradient descent looks for the direction of descent, which is the negative of the error gradient with respect to weights.</p>
+<div class="figure">
+<img src="../images/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_files/Asymptotic%20Convergence%20of%20Gradient%20Descent%20for%20Linear%20Regression%20Least%20Squares%20Optimization_9_8.png" alt="png" />
+<p class="caption">png</p>
+</div>
+<h2 id="dynamical-bifurcations">Dynamical Bifurcations</h2>
+<p>At this point we have identified some significant <span class="math inline"><em>α</em></span> values and studied the dynamics of the system under such values. To review, we observed stationary dynamics for <span class="math inline"><em>α</em> = 0</span>, logistic growth or decay for <span class="math inline"><em>α</em> = −<em>N</em>/∥<em>x</em>∥<sup>2</sup></span>, and oscillatory divergence for <span class="math inline"><em>α</em> = −2<em>N</em>/∥<em>x</em>∥<sup>2</sup></span>. Now, notice our equations are continuous for all values of <span class="math inline"><em>α</em></span>. Thus, with equation (24) we can continuously interpolate between these the distinct dynamical regimes.</p>
+<p>The boundary points of the set <span class="math inline"><em>A</em></span> are dynamical bifurcation points. Suppose the boundary points of <span class="math inline"><em>A</em></span> are used to dissect the real line into disjoint subsets. The qualitative behavior of learning dynamics is distinct for values of <span class="math inline"><em>α</em></span> picked from each of these subsets.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>We have derived exact analytical bounds on <span class="math inline"><em>α</em></span> values which lead to learning convergence. Although linear regression has a closed form solution, that such results exist is exciting. Secondly, auxilary calculations reveal exponentially small convergence timescales. It shows that understanding the learning behavior of gradient descent dynamical systems is actually quite a tractable problem. This ought to inspire efforts to understand the learning process of more complex optimization tasks. This is practically useful as with deeper understanding comes more powerful algorithms. In the longer run, it will be extremely valuable to the effort to decipher the fundamental algorithms underlying intelligent, learning, systems.</p>
