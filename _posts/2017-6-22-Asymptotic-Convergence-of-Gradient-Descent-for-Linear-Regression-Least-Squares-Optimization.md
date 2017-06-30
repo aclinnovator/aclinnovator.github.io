@@ -21,11 +21,11 @@ Despite its widespread use,  the general public may be unaware of the more nuanc
 
 ## Bounds on Learning Rate $\alpha$ for which Learning Converges
 
-Suppose we have already derived the learning rules for a D dimensional regression from the normality assumption. $y = \mathbf{w} \mathbf{x}^T$
+Suppose we have already derived the learning rules for a D dimensional regression from the normality assumption. $y = \mathbf{w} \mathbf{x}$
 
  Also, we have removed all constants of proportionality in the learning equations for the sake of simplicity, which doesn't change the asymptotic behavior of learning. 
 
-Let $\alpha$ be a learning rate, $\mathbf{x}$ be a $T$ by $D$ matrix, $\mathbf{y}$ a T by 1 matrix, and $\mathbf{w}$ a D dimensional row vector.
+Let $\alpha$ be a learning rate, $\mathbf{x}$ be a $D$ by $T$ matrix, $\mathbf{y}$ a 1 by T matrix, and $\mathbf{w}$ a D dimensional row vector.
 
 $$
 \begin{align}
