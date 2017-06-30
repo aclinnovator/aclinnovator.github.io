@@ -89,13 +89,13 @@ $$
 \mathcal{P}(\mathbf{z}(0)) = \frac{\beta ^T}{N}\sum\limits^N_{\mu=1} \exp\left\{H_\mu\ln\alpha \right\} \\
 $$
 
-By maximizing (10), I arrive at an optimal prediction $\mathbf{z}$. 
+By maximizing $(12)$, we arrive at an optimal prediction $\mathbf{z}$. 
 
 $$
 \frac{\partial \mathcal{P}(z_j)}{\partial z_j} = \frac{\beta^T}{N}\ln\alpha\sum\limits^N_{\mu=1} \exp\left\{H_\mu\ln\alpha \right\} \frac{\partial H_\mu}{\partial z_j}
 $$
 
-From (6), 
+From $(8)$, 
 
 $$\frac{\partial H_\mu}{\partial {z}_j} = -\frac{1}{2}x_j^\mu$$
 
@@ -141,7 +141,11 @@ Well, we're using $\tanh$ already to keep the outputs bounded, so why not just u
 
 ## Analysis of The Hopfield Dynamical System
 
+<<<<<<< HEAD
 As a sanity check, I can confirm that equation $(14)$ does in fact converge upon the true value by working backwards. Assume $z_j \approx x^w_j =1 $. Then 
+=======
+As a sanity check, we can confirm that equation $(18)$ does in fact converge upon the true value by working backwards. Assume $z_j \approx x^w_j =1 $. Then 
+>>>>>>> aa1d6ae6d93bcb98604bc7e3a3e86de142c292b7
 
 $$
  \sum\limits^N_{\mu=1}x_j^\mu \alpha^{H_\mu} \approx x^w_j
