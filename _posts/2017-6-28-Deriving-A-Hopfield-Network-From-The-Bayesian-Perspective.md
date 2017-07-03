@@ -14,11 +14,18 @@ The present article follows in the spirit of my previous train of articles, endi
 Perhaps in a sequel article I will try to extend the Hopfield network, which currently operates on binary signals, to continuous valued inputs as well as to translation and scale invariance. 
 
 ## Deriving a Dynamical System
-                                                                                                                                          
+
 Implementing  *content addressable memory*  as a dynamical systems necessitates an ansatz equation, i.e. some initial symbolic structure to play around with. (As much as the field would like its neuronal models to be structure free, the only way to get there is by making simplifying assumptions and introducing structure.). 
 
-Let there be $N$ unique binary strings of length $K$ indexed by $\mu$,  $\mathbf{x}^\mu$, which can be observed with some bits randomly flipped, i.e. signal noise. Such observations are initially sampled from a uniform distribution over binary strings and then this string is permuted by sampling from a noise distribution. Observations will be denoted by the random variable $\mathbf{X}$. In particular, a single bit in random observation $X_j$ is kept with probability $1-p$ and flipped with probability $p$. In particular, let the permutative process be interpreted as a random variable $\zeta$ defined over the binary sample space $\Omega = \{-1, 1\}$ (The author originally tried $\{0,1\}$ as a sample space but came to a point where this definition made some terms very difficult to deal with analytically. As such, the paper will follow the convention of using the range of the $\text{sgn}$ function as its binary digits).Now, 
+Let there be $N$ unique binary strings of length $K$ indexed by $\mu$,  $\mathbf{x}^\mu$, which can be observed with some bits randomly flipped, i.e. signal noise. 
 
+**Input Strings**
+
+![Some example patterns]({{site.url}}/images/Bayesian Hopfield Nets_files/Bayesian Hopfield Nets_7_0.png)
+
+
+
+Such observations are initially sampled from a uniform distribution over binary strings and then this string is permuted by sampling from a noise distribution. Observations will be denoted by the random variable $\mathbf{X}$. In particular, a single bit in random observation $X_j$ is kept with probability $1-p$ and flipped with probability $p$. In particular, let the permutative process be interpreted as a random variable $\zeta$ defined over the binary sample space $\Omega = \{-1, 1\}$ (The author originally tried $\{0,1\}$ as a sample space but came to a point where this definition made some terms very difficult to deal with analytically. As such, the paper will follow the convention of using the range of the $\text{sgn}$ function as its binary digits).Now, 
 $$
 \zeta_j \sim \text{Bernoulli}(p)
 $$
@@ -68,7 +75,7 @@ H_\mu =  \frac{1}{2} \left[ N - \sum\limits_{j=1}^T z_jx^\mu_j \right] = \frac{1
 $$
 
 It is beneficial to take a moment to understand equation $(8)$. If $z_j = x_j$, i.e. the network's prediction matches the true value, then $z_jx_j = 1$. Otherwise, $z_jx_j = -1$. Thus, 
-   
+
 $$\sum x_jz_j = C - I$$
 
 where $C$ is the number of correct guesses and $I$ is the number of incorrect guesses. We would like only the number of incorrect guesses, i.e. $H^\mu = I$. Observe that $C=N-I$, such that 
@@ -107,7 +114,7 @@ $$\frac{\partial \mathcal{P}(z_j)}{\partial z_j} = 0$$
 
 Keeping $z_j$ in a closed interval is equivalent to saying $\|z_j| = \sqrt{z_j^2} = 1$. 
 Thus,
-       
+​       
 $$\nabla z_j = \lambda \frac{z_j}{|z_j|}$$
 
 Because of the absolute value in the denominator, this will be really difficult to solve analytically. Do not fear. Due to the very simple bounds on $z_j$,gradient ascent is a viable solution but only if I place a nonlinear filter over each update to keep $z_j$ in line. The reason for this is because the learning equations Ire derived with the assumption that the range is bounded; I must therefore enforce this constraint in our updates because gradient descent cannot read our minds. Furthermore, it will not be necessary to perform a numerical integration $z_j:= z_j + \Delta z_j$ because I care only about the sign of $z_j$ and nothing more. As such, whether $\Delta z_j >0 $ or $\Delta z_j < 0$ is sufficient for our interests. 
@@ -125,18 +132,28 @@ $$
 z_j := \text{sgn}\left\{ \sum\limits^N_{\mu=1}x_j^\mu \alpha^{H_\mu} \right\}
 $$
 
+**Learning Process**
+
+![Learning Iterations]({{site.url}}/images/Bayesian Hopfield Nets_files/Bayesian Hopfield Nets_11_1.png)
+
 We have arrived at something very similar to the real Hopfield update rule by starting with maximum likelihood concerns. This shows that real Hopfield networks not only converge upon a solution, but onto a statistcally optimal one.  
 
 
+Some simulations have shown that the given Hopfield update rule actually blows up quite quickly, causing numerical overflow. Because we really only care about the magnitude of each output node and not the rate of convergence, we can linearize the given update rule by taking its taylor expansion. 
+
 ## Extensions
 
+### Continuous Networks
 I can read your mind. The Hopfield networks we worked with here are nice and all but they are only configured on binary inputs. No fear; the networks rely on Hamming distance, which is a continuous function of its inputs. Thus, if instead of being limited to $\{-1,1\}$, the range $x_i$ and $z_j$ was expanded without notice to the entire interval $[-1, 1]$, continuity and monotonicity ensures everything will work as expected. 
 
+### Interval Equality
 The next issue we face is elitism. You see, Hopfield networks only serve those special variables that live in a very small part of the numerical world, $[-1, 1]$. Because we are so caring we need to provide equal opportunity for all noisy input signals to be reconstructed. We also have additional worries. The excluded numbers might start suing and charging discrimination. At that point, there will be boycotts, politically charged exchange of words...who knows what will happen. The entire numerical universe might just overflow. In addition, when you have really noisy crowds of numbers, 2 might take on the persona of .4, masquerade as such, infiltrate the inner circle, and rise to a position of prominance only to be unmasked. Do we really want to risk such a scandal? Of course not. 
 
 So really, what do we do?
-   
+
 Well, we're using $\tanh$ already to keep the outputs bounded, so why not just use it initially to keep the inputs bounded. To do this effectively, we need to preserve the relative scale of all numbers. This is easily accomplished by Z-Scoring all input signals and then running them through a nonlinearity $\tanh$. This comes with a cherry on top for free, which is that the same network is invariant to scale by only operating on relative scale. 
+Some tests using $\tanh$ as a bounding nonlinearity unfortunately show that $\tanh$ saturates too quickly to really preserve the relative magnitudes of all inputs. If this is a concern, it might be best to just Z-Score. 
+
 
 
 ## Analysis of The Hopfield Dynamical System
