@@ -99,7 +99,7 @@ alphaData = [
     ("$a=-1.3N/x^2$", -1.3*N/linalg.norm(x[0,:])**2),
     ("$a=-1.6N/x^2$", -1.6*N/linalg.norm(x[0,:])**2),
     ("$a=-1.99N/x^2$", -1.99*N/linalg.norm(x[0,:])**2),
-    ("$a=-2N/x^2$", -2*N/linalg.norm(x[0,:])**2)
+    ("$a=-2N/x^2$", -2.0*N/linalg.norm(x[0,:])**2)
 ]
 ```
 
@@ -115,7 +115,7 @@ for i, d in enumerate(alphaData):
     k, v = d
 #     subplot(len(alphaData),1, i+1)
     figure(figsize=(10,3))
-    outs.append(plotDynamicsForAlpha(v, k, T=150 ))
+    outs.append(plotDynamicsForAlpha(v, k, T=300 ))
 
 tight_layout()
 # suptitle("Dynamical Learning Trajectories for Significant Alpha Values", y=1.08, fontdict={'fontsize':20});
@@ -123,7 +123,7 @@ tight_layout()
 ```
 
 
-    <matplotlib.figure.Figure at 0x115888190>
+    <matplotlib.figure.Figure at 0x116c92b10>
 
 
 
@@ -238,7 +238,7 @@ x.shape
 figure(figsize=(10,10))
 subplot(2,1,1)
 title("Closed From Expression", fontdict={'fontsize':10})
-T = 30
+T = 300
 w0 = random.normal(2, size=2)
 t = np.arange(T)
 
@@ -265,7 +265,7 @@ suptitle(("Asymptotic Behavior "
 
 
 
-    <matplotlib.text.Text at 0x121e15190>
+    <matplotlib.text.Text at 0x116e90490>
 
 
 

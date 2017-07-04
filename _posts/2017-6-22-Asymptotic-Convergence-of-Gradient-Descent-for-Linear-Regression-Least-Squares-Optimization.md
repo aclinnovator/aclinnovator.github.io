@@ -8,7 +8,7 @@ layout: post
 Arguably, one of the most powerful developments in early modern applied mathematics is that of gradient descent, which is a technique for solving programs of the form
 
 $$
-\arg\max _x f(x)
+\arg\max _w f(w)
 $$
 
 by solving a dynamical system 
@@ -17,13 +17,13 @@ $$
 \mathbf{w}_{t+1} := \mathbf{w}+\lambda(\mathbf{w}\mid \mathbf{x}, \mathbf{y})
 $$
 
-Despite its widespread use,  the general public may be unaware of the more nuanced details of its implementation. It is important that they understand its quirks both for their own successful use of the algorithm as well as to ensure their successful autonomous use and development of new and more learning algorithms. In particular, we show in the case of a simple least-squares linear regression optimization that equation (2) diverges if the learning rate exceeds some given upper bound. We also derive an explicit formula for this upper bound. That such results may be theoretically derived is an innovation in the toolkit used by those who develop and study learning algorithms. It shows that after learning rules have been derived, additional analysis must be performed to understand the asymptotic behavior and stability dynamics of the dynamical system defined by the learning rules. 
+In this paper,  we show in the case of a simple least-squares linear regression optimization that the chosen learning rate determines both whether the algorithm will ever converge as well as the rate of convergence itself. Furthermore, we derive a partition of the real line such that learning rates from each of these partitions results in distinct dynamics for the discrete gradient update dynamical system. We show that for only very well selected learning rates will the algorithm ever converge. That such results may be theoretically derived is an innovation in the toolkit used by those who develop and study learning algorithms. It shows that after learning rules have been derived, additional analysis must be performed to understand the asymptotic behavior and stability dynamics of the dynamical system defined by the learning rules. 
 
 ## Bounds on Learning Rate $\alpha$ for which Learning Converges
 
 Suppose we have already derived the learning rules for a D dimensional regression from the normality assumption. $y = \mathbf{w} \mathbf{x}$
 
- Also, we have removed all constants of proportionality in the learning equations for the sake of simplicity, which doesn't change the asymptotic behavior of learning. 
+Also, we have removed all constants of proportionality in the learning equations for the sake of simplicity, which doesn't change the asymptotic behavior of learning. 
 
 Let $\alpha$ be a learning rate, $\mathbf{x}$ be a $D$ by $T$ matrix, $\mathbf{y}$ a 1 by T matrix, and $\mathbf{w}$ a D dimensional row vector.
 

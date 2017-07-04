@@ -6,7 +6,7 @@ permalink: /about/
 
 Welcome Akiva's *forge*.
 
-Akiva is a 15 year old scientist, software developer, and thinker. Akiva is currently studying statistical relationships between structure and function in the *C. Elegans* nervous system and developing models for predicting how structural changes affect network behavior.
+Akiva is a 17 year old scientist, software developer, and thinker. Last year, Akiva studied statistical relationships between structure and function in the *C. Elegans* nervous system and developing models for predicting how structural changes affect network behavior.
 
 Relentlessly resourceful and persistent, Akiva pursues what he is deeply passionate about with a tsunami of energy. He actualizes his potential and endeavors to create value for himself and ultimately the world.
 
@@ -16,6 +16,7 @@ For more about akiva, read [his story]({{site.baseurl}}/story)
 
 Akiva is on the core team for [Openworm](openworm.org)'s [neuronal-analysis](http://github.com/openworm/neuronal-analysis) platform, a comprehensive toolkit for producing, analysing and comparing both simulated and recorded neuronal datasets.
 
+Akiva is currently studying the visual system of Drosophila in the Murthy Lab at Princeton.
  
 He'd love to talk. Connect via:
 

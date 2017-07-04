@@ -75,30 +75,22 @@ solving programs of the form
 by solving a dynamical system
 
 \[
-\mathbf{w}_{t+1} := \mathbf{w}+\alpha\lambda(\mathbf{w}\mid \mathbf{x}, \mathbf{y})
+\mathbf{w}_{t+1} := \mathbf{w}+\lambda(\mathbf{w}\mid \mathbf{x}, \mathbf{y})
 \]
 
-where \(\mathbf{w}\) represents parameters and \(\alpha\) is a learning rate.
-
-In this paper, we show that in gradient descent optimization for regression tasks the dynamical mode (logistic, exponential, or oscillatory, etc.) of the system defined by equation (2)
-depends on which subset of the real line the learning rate of the system \(\alpha\) is an element of.
-The boundaries of these subsets are significant as they represent bifurcation points in the dynamics of gradient descent.
-That such results may be theoretically derived shows that after learning
-rules have been written down, additional analysis must be done to
-understand the asymptotic behavior and stability dynamics of the
-dynamical system defined by the learning rules so as to appropriately
-choose hyperparameters.
-
-In a broad sense, this work sheds light on the space of learning processes which will hopefully inspire new developments in the study of the actual learning process of intelligent learning systems.
+In this paper,  we show in the case of a simple least-squares linear regression optimization that the chosen learning rate determines both whether the algorithm will ever converge as well as the rate of convergence itself. Furthermore, we derive a partition of the real line such that learning rates from each of these partitions results in distinct dynamics for the discrete gradient update dynamical system. We show that for only very well selected learning rates will the algorithm ever converge. That such results may be theoretically derived is an innovation in the toolkit used by those who develop and study learning algorithms. It shows that after learning rules have been derived, additional analysis must be performed to understand the asymptotic behavior and stability dynamics of the dynamical system defined by the learning rules.
 
 \subsection{Bounds on Learning Rate \(\alpha\) for which Learning Converges}
-Suppose we have already derived the learning rules for a D dimensional
-regression from the normality assumption. Also, we have removed all
-constants of proportionality in the learning equations for the sake of
-simplicity, which doesn't change the asymptotic behavior of learning.
 
-Let \(\alpha\) be a learning rate, \(\mathbf{x}\) be a \(T\) by \(D\)
-matrix, \(\mathbf{y}\) a T by 1 matrix, and \(\mathbf{w}\) a D
+Suppose we have already derived the learning rules for a D dimensional
+regression from the normality assumption. \(y = \mathbf{w} \mathbf{x}\)
+
+Also, we have removed all constants of proportionality in the learning
+equations for the sake of simplicity, which doesn't change the
+asymptotic behavior of learning.
+
+Let \(\alpha\) be a learning rate, \(\mathbf{x}\) be a \(D\) by \(T\)
+matrix, \(\mathbf{y}\) a 1 by T matrix, and \(\mathbf{w}\) a D
 dimensional row vector.
 
 \begin{align}
@@ -111,9 +103,7 @@ Observe in this linear task the dynamics of each weight \(w_i\) is
 independent of that of any other weight. We can simplify equation (2) by
 writing \(\beta_ {i1}= - \alpha\mathbf{x_i}\cdot\mathbf{y}\frac{1}{N}\)
 and \(\beta_{i2}=\alpha\mathbf{x}_i \cdot\mathbf{x}_i\frac{1}{N}\), such
-that
-
-\[
+that \[
 \Delta w_{i,t} = \beta_{i1}+\beta_{i2}w_{it}
 \]
 
@@ -132,7 +122,6 @@ a bit of a tedious computation that results in a closed form polynomial
 expression. We simplify the indices in the computation by assuming it
 holds for all \(w_i\). Thus subscripts in the computation on \(w\) refer
 to iterations, with dimension implied.
-
 \begin{align}
 w_{0} &= w_0\\
 w_{1} &= \beta_1+w_0(\beta_2+1)  \\
@@ -229,7 +218,7 @@ It is now clear to see if \(\alpha \not\in A\) then (24) diverges.
 We have tested these results in python simulations and have found that
 indeed with \(\alpha\) values above the upper bound
 \(\alpha \le -\frac{N}{\mathbf{x}_i\cdot\mathbf{x_i}}\) , the system
-converges, and the opposite for
+diverges, and the opposite for
 \(\alpha > -\frac{N}{\| \mathbf{x}_i\|^2}\).
 
 \begin{figure}[htbp]
@@ -239,8 +228,7 @@ converges, and the opposite for
 Regression Least Squares Optimization\_12\_1}
 \end{figure}
 
-\subsection{The Dynamics of the Learning
-Process}\label{the-dynamics-of-the-learning-process}
+\subsection{The Dynamics of the Learning Process}\label{the-dynamics-of-the-learning-process}
 
 Having obtained a nice analytical expression for valid \(\alpha\)
 values, we would like to understand the actual learning dynamics.How is
@@ -265,7 +253,7 @@ Thus we will observe very fast convergence.
 It is worthwhile as an exercise to study the dynamics of the learning
 system under the extremal values of \(\alpha\).
 
-\subsubsection{\(\alpha> 0\),\emph{unstable}}
+\subsubsection{\(\alpha> 0\) \emph{unstable}}
 
 From the definition of \(A\), if \(\alpha > 0\) the system diverges
 exponentially.
@@ -277,7 +265,8 @@ exponentially.
 Regression Least Squares Optimization\_9\_1}
 \end{figure}
 
-\subsubsection{\(\alpha = 0\),\emph{stable}}
+\subsubsection{\(\alpha = 0\), \emph{stable}}
+
 In this case, the weights should diverge linearly. However, because
 \(\beta_{i,1}\) depends on \(\alpha\) and \(\beta_{i1}\) is also the
 constant multiple in the geometric series, the sum itself vanishes and
@@ -298,10 +287,15 @@ the trajectory is stationary.
 Regression Least Squares Optimization\_9\_3}
 \end{figure}
 
-\subsubsection{\(\alpha = -\frac{N}{\|\mathbf{x}_i\|^2}\),\emph{stable}}
-Plugging this into (24) yields an expression \[
+\subsubsection{\(\alpha = -\frac{N}{\|\mathbf{x}_i\|^2}\), \emph{stable}}
+
+Plugging this into (24) yields an expression
+
+\[
 w_t = 0^t\left(w_0 + \frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}\right)+\frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}
-\] This is actually interesting because the system converges in one
+\]
+
+This is actually interesting because the system converges in one
 iteration. The first term vanishes for \(t>0\), such that the closed
 form solution is
 \(\frac{\mathbf{x}_i\cdot\mathbf{y}}{\|\mathbf{x}_i\|^2}\)
@@ -313,6 +307,7 @@ form solution is
 \end{figure}
 
 \subsubsection{\(\lim\limits_{k \to -2^+} \alpha = -k\frac{N}{\|\mathbf{x}_i\|}\),\textbf{stable}}
+
 Recall from the definiton of \(A\) that its left bound is open. As such,
 the dynamics of learning are convergent for values of \(\alpha\)
 infinitesimally close to \(2\).
@@ -323,23 +318,69 @@ infinitesimally close to \(2\).
 \caption{png}
 \end{figure}
 
-\subsubsection{\(\alpha = -2\frac{N}{\|\mathbf{x}_i\|^2}\), \emph{unstable}}
-By plugging in this value of \(\alpha\), we get an non-converging
-oscillator. \[
+\subsubsection{\(\alpha = -2\frac{N}{\|\mathbf{x}_i\|^2}\), \emph{stable}}
+
+By plugging in this value of \(\alpha\), we get an oscillator.
+
+\[
 w_t =(-1)^t w_0 + \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}\left((-1)^t -1\right)
 \]
 
+\subsubsection{\(\alpha > -2\frac{N}{\|\mathbf{x}_i\|^2}\), \emph{unstable}}
+
+This time, we get a divergent oscillator
+
+\[
+w_t =(-1)^t w_0 + \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}\left((-1)^t(1+ \epsilon)^t-1\right)
+\]
+
 By neglecting the terms with constant magnitude, we can rewrite (26) to
-emphasize its nature as a divergent oscillator. If we look back at our
-work, (26) oscillates only because gradient descent looks for the
-direction of descent, which is the negative of the error gradient with
-respect to weights.
+emphasize its nature as a divergent oscillator.
+
+\[
+w_t \propto \frac{\mathbf{x}_i \cdot \mathbf{y}}{\|\mathbf{x}_i\|^2}e^{i \pi t}e^{\ln{[1+\epsilon]}t}
+\]
+
+If we look back at our work, (26) oscillates only because gradient
+descent looks for the direction of descent, which is the negative of the
+error gradient with respect to weights.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics{../images/Asymptotic\%20Convergence\%20of\%20Gradient\%20Descent\%20for\%20Linear\%20Regression\%20Least\%20Squares\%20Optimization_files/Asymptotic\%20Convergence\%20of\%20Gradient\%20Descent\%20for\%20Linear\%20Regression\%20Least\%20Squares\%20Optimization_9_8.png}
 \caption{png}
 \end{figure}
+
+\subsection{Polynomials}\label{polynomials}
+
+It is not hard to imagine cases where we write \(\hat{y}\) as a linear
+combination of multivariate polynomials.
+
+\[
+\hat{y} = \sum\limits_{i=0}^K\mathbf{w_i}\left(\mathbf{x}^{T}\right)^j
+\]
+
+While at first glance this seems nasty, it is actually not very
+different from the case of linear regression. This is because
+\(\hat{y}\) remains a linear function of the weights; we have merely
+added \(N\times(K-1)\) features to the dataset corresponding to \(K\)
+powers of \(N\) input variables. Thus, the analytical machinery we have
+developed extends to arbitrary polynomials. This is potentially useful
+because any function can be expressed as a polynomial.
+
+\subsection{Nonlinear Functions}\label{nonlinear-functions}
+
+Suppose we add a nonlinearity to the above polynomial system:
+
+\[
+\hat{y} = \sigma\left(  \sum\limits_{i=1}^N\sum\limits^{K}_{j=0}  w_{ij}x_i^j\right)
+\]
+
+This is actually surprisingly easy to fit if we use
+\(y^\prime= \sigma^{-1}(y)\) as the dependent variable instead of just
+\(y\). This effectively unrolls the nonlinearity so all the work
+involves a linear system, which means the analytics we have studied
+still apply.
 
 \subsection{Dynamical Bifurcations}\label{dynamical-bifurcations}
 
@@ -356,18 +397,39 @@ Suppose the boundary points of \(A\) are used to dissect the real line
 into disjoint subsets. The qualitative behavior of learning dynamics is
 distinct for values of \(\alpha\) picked from each of these subsets.
 
-\subsection{Conclusion}\label{conclusion}
+\subsection{Discussion}\label{discussion}
 
 We have derived exact analytical bounds on \(\alpha\) values which lead
-to learning convergence. Although linear regression has a closed form
-solution, that such results exist is exciting. Secondly, auxilary
-calculations reveal exponentially small convergence timescales. It shows
-that understanding the learning behavior of gradient descent dynamical
-systems is actually quite a tractable problem. This ought to inspire
-efforts to understand the learning process of more complex optimization
-tasks. This is practically useful as with deeper understanding comes
-more powerful algorithms. In the longer run, it will be extremely
-valuable to the effort to decipher the fundamental algorithms underlying
-intelligent, learning, systems.
+to learning convergence and used these bounds to show analytically and
+computationaly the existence of distinct dynamical regimes in the
+learning dynamics of gradient descent in linear least squares
+regression. As the alpha parameter is varied, the system travels through
+different modes of stability but is always stable at the true weight
+value. Through some auxilary calculations revealed exponentially small
+convergence timescales. Lastly, we showed that these results also hold
+for nonlinear and polynomial regression.
+
+This article is only a basic preview of what is to come. The
+presentation here is limited to instances where the Gaussian noise
+assumption can be made. It doesn't consider alternative error functions.
+The analysis is restricted to the deterministic but in the future could
+include comments (1) on how the learning is affected by the spatial
+distribution of the independent variables and (2) on initial weight
+conditions.
+
+Although linear regression has a closed form solution, that such
+analytical results on the dynamics of gradient descent is exciting. It
+shows that understanding the learning behavior of gradient descent
+dynamical systems is actually quite a tractable problem. This ought to
+inspire efforts to understand the learning process of more complex
+optimization tasks. This is practically useful as with deeper
+understanding comes more powerful algorithms. In the longer run, it will
+be extremely valuable to the effort to decipher the fundamental
+algorithms underlying intelligent, learning, systems.
+
+\subsection{Supplementary Materials}\label{supplementary-materials}
+
+The code used to generate the figures can be found
+\href{https://github.com/theideasmith/theideasmith.github.io/blob/master/_notebooks/AsymptoticConvergence/Asymptotic\%20Convergence\%20of\%20Gradient\%20Descent\%20for\%20Linear\%20Regression\%20Least\%20Squares\%20Optimization.ipynb}{here}
 
 \end{document}

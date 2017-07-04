@@ -19,7 +19,7 @@ theme_settings:
    Powered by <a hrefs"http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
 
   # Icons
-  rss: false
+  rss: true
   email_address: aclscientist@gmail.com # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
@@ -42,7 +42,7 @@ theme_settings:
 
   # Scripts
   google_analytics: "UA-101714604-1" # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname:
+  disqus_shortname: theideasmith-github-io
   muut_community_name: # From muut.com settings, e.g. "muttcommunityname"
   katex: false # Enable if using math markup
 
