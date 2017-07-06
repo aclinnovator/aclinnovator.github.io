@@ -181,6 +181,13 @@ where $\kappa$ is the arbitrarily chosen rate of convergence. Eventually this sy
 
 
 
+## Supplementary Materials
+
+The python implementation of hopfield networks used to generate the figures is located [here](https://github.com/theideasmith/theideasmith.github.io/blob/master/_notebooks/Bayesian%20Hopfield%20Nets.ipynb). 
+
 **Bibliography** 
 
 Hancock, Edwin R., and Josef Kittler. "A Bayesian interpretation for the Hopfield network." *Neural Networks, 1993., IEEE International Conference on*. IEEE, 1993.
+
+
+
