@@ -6,7 +6,7 @@ permalink: /about/
 
 Welcome Akiva's *forge*.
 
-Akiva is a 17 year old scientist, software developer, and thinker. Last year, Akiva studied statistical relationships between structure and function in the *C. Elegans* nervous system and developing models for predicting how structural changes affect network behavior.
+Akiva is a 20 year old scientist, software developer, and thinker. Last year, Akiva studied statistical relationships between structure and function in the *C. Elegans* nervous system and developing models for predicting how structural changes affect network behavior.
 
 Relentlessly resourceful and persistent, Akiva pursues what he is deeply passionate about with a tsunami of energy. He actualizes his potential and endeavors to create value for himself and ultimately the world.
 
@@ -16,30 +16,5 @@ For more about akiva, read [his story]({{site.baseurl}}/story)
 
 Akiva is on the core team for [Openworm](openworm.org)'s [neuronal-analysis](http://github.com/openworm/neuronal-analysis) platform, a comprehensive toolkit for producing, analysing and comparing both simulated and recorded neuronal datasets.
 
-Akiva is currently studying the visual system of Drosophila in the Murthy Lab at Princeton.
- 
-He'd love to talk. Connect via:
-
-+ [medium][2]
-+ [quora][3]
-+ [twitter][4]
-+ [stackexchange][5]
-+ [google][6]
-+ email: <a href="mailto:aclscientist@gmail.com">aclscientist@gmail.com</a>
-+ phone: <a href="tel:12017531974"> 1.201.753.1974</a>
-
-
-
-![Thats me writing code]({{ site.baseurl }}/assets/me.png)
-
-
-
-
-
-
-
-[2]:	http://medium.com/@theideasmith
-[3]:	https://www.quora.com/Cornelius-Richard
-[4]:	https://twitter.com/theideasmith
-[5]:	http://stackexchange.com/users/4279411/theideasmith?tab=accounts
-[6]: https://www.google.com/#q=akiva+lipshitz
+At the the time this was written, Akiva was studying the visual system of Drosophila in the [Murthy Lab](https://murthylab.princeton.edu).
+Now Akiva is a student at Yeshiva University. 
